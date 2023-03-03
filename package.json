@@ -1,0 +1,30 @@
+{
+  "name": "summerpet",
+  "version": "1.0.0",
+  "description": "Web appliaction to take care pets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaimeJimeenez/SummerPet.git"
+  },
+  "keywords": [
+    "Pets",
+    "SummerPet",
+    "Node.js",
+    "JavaScript",
+    "HTML5",
+    "CSS",
+    "Bootstrap5",
+    "JQuery",
+    "Ajax"
+  ],
+  "author": "Alex Guillermo Bonilla, Elena Caridad Zingoni, Marcos Gago Rivas, Jesus Gonzalez Carrillo, Jaime Jiménez Nieto, Miguel Marcos Asenjo, Miguel Martinez-Almeida, Ivan Pisonero Diaz, Ignacio Redondo Navarro, Luis Vizán Morales",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaimeJimeenez/SummerPet/issues"
+  },
+  "homepage": "https://github.com/JaimeJimeenez/SummerPet#readme"
+}
