@@ -26,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/JaimeJimeenez/SummerPet/issues"
   },
-  "homepage": "https://github.com/JaimeJimeenez/SummerPet#readme"
+  "homepage": "https://github.com/JaimeJimeenez/SummerPet#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
 }
