@@ -15,7 +15,7 @@ test('Searching for no one', done => {
             return;
         }
         try {
-            expect(data).toStrictEqual([]); // Not toBe, pending to review this
+            expect(data).toStrictEqual([]);  // Not toBe, pending to review this
             done();
         } catch(error) {
             done(error);
@@ -72,6 +72,7 @@ test('Searching for Lucia', done => {
         data.forEach((row) => {
             result.push({ Nombre: row.Nombre, Telefono: row.Telefono, Email: row.Email, Direccion: row.Direccion });
         });
+        console.log(result);
         try {
             expect(result).toStrictEqual([
                 {
