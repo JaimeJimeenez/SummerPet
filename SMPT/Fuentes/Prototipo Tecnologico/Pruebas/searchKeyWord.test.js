@@ -15,7 +15,7 @@ test('Searching for no one', done => {
             return;
         }
         try {
-            expect(data).toStrictEqual([]);  // Not toBe, pending to review this
+            expect(data).toStrictEqual([]);  
             done();
         } catch(error) {
             done(error);
