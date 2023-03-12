@@ -1,9 +1,9 @@
 'use strict'
 
 const mysql = require('mysql');
-const config = require('../Src/config');
+const config = require('../config');
 
-const DAOUsuario = require('../Src/DAOs/DAOUsuario');
+const DAOUsuario = require('../DAOs/DAOUsuario');
 
 const pool = mysql.createPool(config.mysqlConfig);
 const daoUsuario = new DAOUsuario(pool);
