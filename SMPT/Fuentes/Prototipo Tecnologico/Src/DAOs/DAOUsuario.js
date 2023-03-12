@@ -13,7 +13,7 @@ class DAOUsuario {
                 connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
-                    else callback(null, rows);
+                    else callback(null, rows[0]);
                 });
             }
         });
