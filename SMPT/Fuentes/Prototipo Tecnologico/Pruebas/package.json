@@ -1,0 +1,33 @@
+{
+  "name": "pruebas",
+  "version": "1.0.0",
+  "description": "'Folder to test code'",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaimeJimeenez/SummerPet.git"
+  },
+  "keywords": [
+    "Test",
+    "Jest",
+    "Unitaria",
+    "Integración",
+    "Sistema",
+    "Aceptación"
+  ],
+  "author": "SummerPet Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JaimeJimeenez/SummerPet/issues"
+  },
+  "homepage": "https://github.com/JaimeJimeenez/SummerPet#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
