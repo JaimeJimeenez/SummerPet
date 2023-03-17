@@ -40,10 +40,13 @@
 
                 <li class = 'd-block justify-content-center align-items-center  bg-light p-4 w-75 mx-auto mb-3 mt-3'>
                     <div class = 'row'>
-                        <div class = "col col-sm-3 col-md-3 col-xl-3 text-center"> Nombre: <%= usuario.Nombre %> </div>
-                        <div class = "col col-sm-3 col-md-3 col-xl-3 text-center"> Email: <%= usuario.Email %> </div>
-                        <div class = "col col-sm-3 col-md-3 col-xl-3 text-center"> Telefono: <%= usuario.Telefono %> </div>
-                        <div class = "col col-sm-3 col-md-3 col-xl-3 text-center"> Direccion: <%= usuario.Direccion %> </div>
+                        <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> Nombre: <%= usuario.Nombre %> </div>
+                        <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> Email: <%= usuario.Email %> </div>
+                        <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> Telefono: <%= usuario.Telefono %> </div>
+                        <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> Direccion: <%= usuario.Direccion %> </div>
+                        <div class = "col offset-2 col-sm col-md col-xl">
+                            <a href = "" class = 'btn btn-primary'>Ver perfil</a>
+                        </div>
                     </div>
                 </li>
             <%}); %>
