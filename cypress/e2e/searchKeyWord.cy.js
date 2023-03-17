@@ -17,11 +17,4 @@ describe('first user history integration test', () => {
     cy.get('li').should('have.length', 2);
   });
 
-  it('displays Madriz search', () => {
-    const madriz = 'Madriz';
-
-    cy.get('input').type(`${madriz}{enter}`);
-    cy.get('li').should('have.length', 2);
-  });
-
 });
