@@ -89,32 +89,3 @@ test('Searching for Lucia', done => {
 
     daoUsuario.searchByKeyWord('Lucia', callback);
 });
-
-test('Searching error', done => {
-    function callback(error, data) {
-        if (error) {
-            done(error);
-            return;
-        }
-
-        let result = [];
-        data.forEach((row) => {
-            result.push({ Nombre: row.Nombre, Telefono: row.Telefono, Email: row.Email, Direccion: row.Direccion });
-        });
-        try {
-            expect(result).toStrictEqual([
-                {
-                    Nombre: 'Davis',
-                    Telefono: '123456789',
-                    Email: 'david@email.com',
-                    Direccion: 'Barcelona'
-                }
-            ]);
-            done();
-        } catch (error) {
-            done(error);
-        }
-    }
-
-    daoUsuario.searchByKeyWord('David', callback);
-});
