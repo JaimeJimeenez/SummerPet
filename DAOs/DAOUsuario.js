@@ -8,7 +8,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'SELECT * FROM Usuario Where instr(Nombre, ?) or instr(Telefono, ?) or instr(Email, ?) or instr(Direccion, ?) > 0;';
+                const sql = 'SELECT * FROM user Where instr(name, ?) or instr(phone, ?) or instr(email, ?) or instr(direction, ?) > 0;';
 
                 connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
                     connection.release();
