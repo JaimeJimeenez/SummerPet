@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16
       - name: Cypress run
-        uses: cypress-io/github-action@v12.7.0 # use the explicit version number
+        uses: cypress-io/github-action@v5.0.0 # use the explicit version number
         with:
           build: npm run build
           start: npm start
