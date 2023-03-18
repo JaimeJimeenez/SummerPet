@@ -37,6 +37,18 @@ app.get('/searchKeyWord', (request, response) => {
     });
 });
 
+app.get('/profile', (request, response) => {
+    let id = Number(request.query.id);
+    if(isNaN(id)) {
+        response.status(404);
+        response.end('Incorrect petition');
+    } else daoUsuario.getUser(id, (err, user) => {
+        console.log(user);
+        if (err) console.log(err);
+        else response.render('profile', { usuario : user });
+    });
+});
+
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });

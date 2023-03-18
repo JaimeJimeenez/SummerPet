@@ -34,7 +34,7 @@ test('Searching for Madrid', done => {
 
         let result = [];
         data.forEach((row) => {
-            result.push({ Nombre: row.Nombre, Telefono: row.Telefono, Email: row.Email, Direccion: row.Direccion });
+            result.push({ Name: row.Name, Phone: row.Phone, Email: row.Email, Direction: row.Direction });
         });
         
         try {
