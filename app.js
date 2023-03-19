@@ -46,7 +46,6 @@ app.get('/profile', (request, response) => {
         response.status(400);
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
-        console.log(user);
         if (err) console.log(err);
         else response.render('profile', { usuario : user });
     });
@@ -58,7 +57,6 @@ app.get('/image/:id', (request, response) => {
         response.status(400);
         response.end('Incorrect petition');
     } else daoUsuario.getImage(id, (err, image) => {
-        console.log(image);
         if (err) console.log(err);
         else response.end(image);
     });

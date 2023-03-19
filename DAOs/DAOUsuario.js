@@ -42,7 +42,6 @@ class DAOUsuario {
 
                 connection.query(sql, [id], (err, user) => {
                     connection.release();
-                    console.log(user);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else if (user.length === 0) callback(new Error('No existe'));
                     else callback(null, user[0].Image);
