@@ -4,6 +4,7 @@
   "description": "Web appliaction to take care pets",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "jest",
     "cypress:open": "cypress open"
   },
