@@ -3,10 +3,10 @@ describe('first user history integration test', () => {
     cy.visit('http://localhost:3000');
   })
 
-  it('displays lucia search', () => {
-    const lucia = 'Lucia';
+  it('displays maria search', () => {
+    const maria = 'Maria';
 
-    cy.get('input').type(`${lucia}{enter}`);
+    cy.get('input').type(`${maria}{enter}`);
     cy.get('li').should('have.length', 1);
   });
 
