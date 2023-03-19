@@ -25,7 +25,7 @@ test('Searching for no one', done => {
     daoUsuario.searchByKeyWord('Madriz', callback);
 });
 
-test('Searching for Madrid', done => {
+test('Searching for Barcelona', done => {
     function callback(error, data) {
         if (error) {
             done(error);
@@ -34,22 +34,22 @@ test('Searching for Madrid', done => {
 
         let result = [];
         data.forEach((row) => {
-            result.push({ Nombre: row.Nombre, Telefono: row.Telefono, Email: row.Email, Direccion: row.Direccion });
+            result.push({ Name: row.Name, Phone: row.Phone, Email: row.Email, Direction: row.Direction });
         });
         
         try {
             expect(result).toStrictEqual([
                 {
-                    Nombre: 'David',
-                    Telefono: '698754312',
-                    Email: 'david@email.com',
-                    Direccion: 'Madrid'
+                    Name: 'Miguel',
+                    Phone: '601478529',
+                    Email: 'miguelnose@email.com',
+                    Direction: 'Barcelona'
                 },
                 {
-                    Nombre: 'Lucia',
-                    Telefono: '654312987',
-                    Email: 'lucia@email.com',
-                    Direccion: 'Madrid'
+                    Name: 'Alejandro',
+                    Phone: '613204578',
+                    Email: 'alejandrorodriguez@email.com',
+                    Direction: 'Barcelona'
                 }
             ]);    
             done();
@@ -58,10 +58,10 @@ test('Searching for Madrid', done => {
         }
     }
 
-    daoUsuario.searchByKeyWord('Madrid', callback);
+    daoUsuario.searchByKeyWord('Barcelona', callback);
 });
 
-test('Searching for Lucia', done => {
+test('Searching for Patricia', done => {
     function callback(error, data) {
         if (error) {
             done(error);
@@ -70,22 +70,22 @@ test('Searching for Lucia', done => {
 
         let result = [];
         data.forEach((row) => {
-            result.push({ Nombre: row.Nombre, Telefono: row.Telefono, Email: row.Email, Direccion: row.Direccion });
+            result.push({ Name: row.Name, Phone: row.Phone, Email: row.Email, Direction: row.Direction });
         });
         try {
             expect(result).toStrictEqual([
                 {
-                    Nombre: 'Lucia',
-                    Telefono: '654312987',
-                    Email: 'lucia@email.com',
-                    Direccion: 'Madrid'
-                }]
-                );
+                    Name: 'Patricia',
+                    Phone: '987654321',
+                    Email: 'patriciamatamoros@email.com',
+                    Direction: 'Valencia'
+                }
+            ]);
             done();
         } catch (error) {
             done(error);
         }
     }
 
-    daoUsuario.searchByKeyWord('Lucia', callback);
+    daoUsuario.searchByKeyWord('Patricia', callback);
 });

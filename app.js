@@ -6,10 +6,13 @@ const path = require('path');
 // Package's Modules
 const mysql = require('mysql');
 const express = require('express');
+const multer = require('multer');
 
 // File's Modules
 const config = require('./config');
 const DAOUsuario = require('./DAOs/DAOUsuario');
+
+const multerFactory = multer( { storage : multer.memoryStorage() });
 
 // Create pool connection to database
 const pool = mysql.createPool(config.mysqlConfig);
@@ -37,6 +40,38 @@ app.get('/searchKeyWord', (request, response) => {
     });
 });
 
-app.listen(config.port, () => {
+app.get('/profile', (request, response) => {
+    let id = Number(request.query.id);
+    if(isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getUser(id, (err, user) => {
+        if (err) console.log(err);
+        else response.render('profile', { usuario : user });
+    });
+});
+
+app.get('/image/:id', (request, response) => {
+    let id = Number(request.params.id);
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getImage(id, (err, image) => {
+        if (err) console.log(err);
+        else response.end(image);
+    });
+});
+
+/*
+app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
+    if (request.file) console.log(request.file);
+    daoUsuario.enviarImagen(request.file.buffer, (err) => {
+        if (err) console.log(err);
+        else console.log('Todo ok');
+    });
+});
+*/
+
+app.listen(process.env.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
