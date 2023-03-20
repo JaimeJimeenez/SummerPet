@@ -1,6 +1,6 @@
 describe('first user history integration test', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('https://summerpet.azurewebsites.net/');
   })
 
   it('displays maria search', () => {
