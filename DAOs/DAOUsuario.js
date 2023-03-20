@@ -50,6 +50,20 @@ class DAOUsuario {
         });
     }
 
+    getPhotosLocation(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select ...';
+                
+                connection.query(sql, [id], (err, photos) => {
+                    if (err) console.log(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, photos);
+                });
+            }
+        });
+    }
+
     searchByKeyWord(keyWord, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));

@@ -62,6 +62,17 @@ app.get('/image/:id', (request, response) => {
     });
 });
 
+app.get('/picturesLocation', (request, response) => {
+    let id = Number(request.query.id);
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getPhotosLocation(id, (err, photos) => {
+        if (err) console.log(err);
+        else response.render('locationPhotos', { usuario : photos} );
+    });
+});
+
 /*
 app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
     if (request.file) console.log(request.file);
@@ -69,12 +80,12 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
         if (err) console.log(err);
         else console.log('Todo ok');
     });
-});
+});*/
 
+/*
 app.listen(config.port, () => {
-    console.log('Server listening at port: + config.port);
-});
-*/
+    console.log('Server listening at port: ' + config.port);
+});*/
 
 app.listen(process.env.PORT, () => {
     console.log('Server listening at port: ' + config.port);
