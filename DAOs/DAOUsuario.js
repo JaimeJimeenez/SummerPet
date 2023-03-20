@@ -23,7 +23,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
             else {
-                const sql = 'update User set Image = ? where Id = 1';
+                const sql = 'insert into PhotosLocation values (1, ?)';
 
                 connection.query(sql, [imagen], (err) => {
                     connection.release();
@@ -54,7 +54,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select ...';
+                const sql = 'Select User.Id, User.Name, User.Direction, Photos from PhotosLocation JOIN User ON IdUser = User.Id where IdUser = ?';
                 
                 connection.query(sql, [id], (err, photos) => {
                     if (err) console.log(new Error('Error de acceso a la base de datos: ' + err.message));
