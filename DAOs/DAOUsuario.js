@@ -23,18 +23,21 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
             else {
-                const sql = 'insert into PhotosLocation values (1, ?)';
+                const sql = 'update User set Image = ? where Id = 1;';
 
-                connection.query(sql, [imagen], (err) => {
+                connection.query(sql, [imagen], (err, result) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else callback(null);
+                    else this.insertUserPhoto(1, result.insertId, (err) => {
+                        if (err) callback(err);
+                        else callback(null);
+                    });
                 });
             }
         });
     }
 
-    getImage(id, callback) {
+    getProfilePhoto(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
@@ -50,15 +53,65 @@ class DAOUsuario {
         });
     }
 
+    getPhotoLocation(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select Photo From PhotosLocation where Id = ?;';
+
+                connection.query(sql, [id], (err, photo) => {
+                    connection.release();
+
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else if (photo.length === 0) callback(new Error('No existe'));
+                    else callback(null, photo[0].Photo);
+                });
+            }
+        });
+    }
+
+    havePhotosLocation(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select count(*) from UserPhotos where idUser = ?;';
+
+                connection.query(sql, [id], (err, numPhotos) => {
+                    connection.release();
+
+                    if (err) new Error('Error de acceso a la base de dato: ' + err.message);
+                    else if (numPhotos[0]['count(*)'] === 0) callback(null, false);
+                    else callback(null, true);
+                });
+            }
+        });
+    }
+
     getPhotosLocation(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, User.Name, User.Direction, Photos from PhotosLocation JOIN User ON IdUser = User.Id where IdUser = ?';
-                
+                const sql = 'Select User.Id, Name, Direction, UserPhotos.IdPhoto, Image from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
+
                 connection.query(sql, [id], (err, photos) => {
-                    if (err) console.log(new Error('Error de acceso a la base de datos: ' + err.message));
+                    connection.release();
+                    if (err) new Error('Error de acceso a la base de datos: ' + err.message);
                     else callback(null, photos);
+                });
+            }
+        });
+    }
+
+    insertUserPhoto(idUser, idPhoto, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert into UserPhotos values (?, ?);';
+
+                connection.query(sql, [idUser, idPhoto], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null);
                 });
             }
         });

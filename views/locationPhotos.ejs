@@ -23,10 +23,10 @@
         <div class = "row mt-5" id = 'profileUser'>
 
             <div class = "col col-sm-4 col-md-4 col-xl-4">
-                <% if (!usuario.Image) { %>
+                <% if (!usuario.ProfilePicture) { %>
                     <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="250" height="250">
                 <% } else { %>
-                    <img src = "/image/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="250" height="250" class = 'rounded-circle'>
+                    <img src = "/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="250" height="250" class = 'rounded-circle'>
                 <% } %>
                 <div class = 'row mt-2'>
                     <div class = "col col-sm-6 col-md-6 col-xl-6 h3">
@@ -52,33 +52,40 @@
                             </li>
                         </ul>
                     </nav>
-                    <div id = 'photos' class = "carousel slide mt-3" data-bs-ride = 'carousel'>
+
+                    <% if (!usuario.hasPhotos) { %>
+                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                            No existen fotos de momento
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div> 
+                    <% } else { %>
+                        <div id = 'photos' class = "carousel slide mt-3" data-bs-ride = 'carousel'>
                         
-                        <div class = "carousel-indicators">
-                            <button type = 'button' data-bs-target = '#photos' data-bs-slide-to = '0' class = 'active'></button>
-                            <button type = 'button' data-bs-target = '#photos' data-bs-slide-to = '1' class = 'active'></button>
-                        </div>
+                            <div class = "carousel-inner">
 
-                        <div class = "carousel-inner">
-                            <div class = "carousel-item active">
-                                <img src = "/images/images.jpeg" alt = "Prueba" class = 'd-block' style = 'width:100%'>
+                                <div class = "carousel-item active">
+                                    <img src = "/photosLocation/<%= usuario.Photos[0] %>" alt = "Prueba" class = 'd-block' style = 'width:100%'>
+                                </div>
+
+                                <% usuario.Photos.shift(); usuario.Photos.forEach((photo) => { %>
+
+                                    <div class = "carousel-item">
+                                        <img src = "/photosLocation/<%=photo%>" alt = "Prueba" class = 'd-block' style = 'width: 100%;'>
+                                    </div>
+
+                                <% }); %>
                             </div>
-                            <div class = "carousel-item">
-                                <img src = "/images/images-2.jpeg" alt = "Prueba" class = 'd-block' style = 'width: 100%;'>
-                            </div>
-
-                           
-                        </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target = "#photos" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
                             
-                        <button class="carousel-control-next" type="button" data-bs-target="#photos" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
-
-                    </div>  
+                            <button class="carousel-control-prev" type="button" data-bs-target = "#photos" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            
+                            <button class="carousel-control-next" type="button" data-bs-target="#photos" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>  
+                    <% } %>
+                    
 
                 </div>
 

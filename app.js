@@ -51,12 +51,12 @@ app.get('/profile', (request, response) => {
     });
 });
 
-app.get('/image/:id', (request, response) => {
+app.get('/profilePhoto/:id', (request, response) => {
     let id = Number(request.params.id);
     if (isNaN(id)) {
         response.status(400);
         response.end('Incorrect petition');
-    } else daoUsuario.getImage(id, (err, image) => {
+    } else daoUsuario.getProfilePhoto(id, (err, image) => {
         if (err) console.log(err);
         else response.end(image);
     });
@@ -64,13 +64,49 @@ app.get('/image/:id', (request, response) => {
 
 app.get('/picturesLocation', (request, response) => {
     let id = Number(request.query.id);
+
     if (isNaN(id)) {
         response.status(400);
         response.end('Incorrect petition');
-    } else daoUsuario.getPhotosLocation(id, (err, photos) => {
-        console.log(photos);
+    } else {
+        daoUsuario.havePhotosLocation(id, (err, havePhotos) => {
+            if (err) console.log(err);
+            else if (havePhotos) {
+                daoUsuario.getPhotosLocation(id, (err, rows) => {
+                    if (err) console.log(err);
+                    else {
+                        let photos = [];
+                        rows.forEach((user) => photos.push(user.IdPhoto));
+                        let user = {
+                            Id: rows[0].Id,
+                            ProfilePicture: rows[0].Image,
+                            Name: rows[0].Name,
+                            Direction: rows[0].Direction,
+                            hasPhotos: true,
+                            Photos: photos
+                        };
+                        response.render('locationPhotos', { usuario : user });
+                    }
+                });
+            } else {
+                daoUsuario.getUser(id, (err, user) => {
+                    if (err) console.log(err);
+                    else response.render('locationPhotos', { usuario : user });
+                });
+            }
+        });
+    }
+});
+
+app.get('/photosLocation/:id', (request, response) => {
+    let id = Number(request.params.id);
+
+    if (isNaN(id)) {
+        request.response(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getPhotoLocation(id, (err, photo) => {
         if (err) console.log(err);
-        else response.render('locationPhotos', { usuario : photos} );
+        else response.end(photo);
     });
 });
 
@@ -78,7 +114,7 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
     if (request.file) console.log(request.file);
     daoUsuario.enviarImagen(request.file.buffer, (err) => {
         if (err) console.log(err);
-        else console.log('Todo ok');
+        else response.redirect('/');
     });
 });
 
