@@ -22,37 +22,11 @@
     <div class = "container-fluid">
         <div class = "row mt-5" id = 'profileUser'>
 
-            <div class = "col col-sm-4 col-md-4 col-xl-4">
-                <% if (!usuario.Image) { %>
-                    <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="250" height="250">
-                <% } else { %>
-                    <img src = "/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="250" height="250" class = 'rounded-circle'>
-                <% } %>
-                <div class = 'row mt-2'>
-                    <div class = "col col-sm-6 col-md-6 col-xl-6 h3">
-                        <div class = "row"> <%= usuario.Name %> </div>
-                        <div class = "row h5"> <%= usuario.Direction %> </div>
-                    </div>
-                </div>
-            </div>
+            <%- include('partials/profileDesc') %>
 
             <div class = "col col-sm col-md col-xl">
                 <div class = "row">
-                    <nav class = 'navbar bg-light' id = 'navUser'>
-                        <ul class = 'navbar nav'>
-                            <li class = 'nav-item'>
-                                <a href = "/profile?id=<%=usuario.Id%>" class = 'nav-link active'> 
-                                    Descripción 
-                                </a>
-                            </li>
-                            <li class = 'nav-item'>
-                                <a href = "/picturesLocation?id=<%=usuario.Id%>" class = 'nav-link'> 
-                                    Lugar
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-
+                    <%- include('partials/navbars/navbarUser') %>
                 </div>
             </div>
         </div>

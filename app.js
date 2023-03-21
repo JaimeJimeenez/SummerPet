@@ -4,6 +4,7 @@
 const path = require('path');
 
 // Package's Modules
+const morgan = require('morgan');
 const mysql = require('mysql');
 const express = require('express');
 const multer = require('multer');
@@ -28,6 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded( { extended : true } ));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
     response.render('index.ejs');
@@ -46,6 +48,7 @@ app.get('/profile', (request, response) => {
         response.status(400);
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
+        console.log(user);
         if (err) console.log(err);
         else response.render('profile', { usuario : user });
     });
@@ -56,9 +59,9 @@ app.get('/profilePhoto/:id', (request, response) => {
     if (isNaN(id)) {
         response.status(400);
         response.end('Incorrect petition');
-    } else daoUsuario.getProfilePhoto(id, (err, image) => {
+    } else daoUsuario.getProfilePhoto(id, (err, photo) => {
         if (err) console.log(err);
-        else response.end(image);
+        else response.end(photo);
     });
 });
 
@@ -79,10 +82,9 @@ app.get('/picturesLocation', (request, response) => {
                         rows.forEach((user) => photos.push(user.IdPhoto));
                         let user = {
                             Id: rows[0].Id,
-                            ProfilePicture: rows[0].Image,
+                            Photo: rows[0].Photo,
                             Name: rows[0].Name,
                             Direction: rows[0].Direction,
-                            hasPhotos: true,
                             Photos: photos
                         };
                         response.render('locationPhotos', { usuario : user });

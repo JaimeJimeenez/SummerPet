@@ -12,6 +12,7 @@ class DAOUsuario {
 
                 connection.query(sql, [id], (err, user) => {
                     connection.release();
+                    
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, user[0]);
                 });
@@ -23,10 +24,11 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
             else {
-                const sql = 'update User set Image = ? where Id = 1;';
+                const sql = 'update User set Photo = ? where Id = 1;';
 
                 connection.query(sql, [imagen], (err, result) => {
                     connection.release();
+
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else this.insertUserPhoto(1, result.insertId, (err) => {
                         if (err) callback(err);
@@ -41,13 +43,14 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'SELECT Image FROM User WHERE Id = ?;';
+                const sql = 'Select Photo from User where Id = ?;';
 
                 connection.query(sql, [id], (err, user) => {
                     connection.release();
+
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else if (user.length === 0) callback(new Error('No existe'));
-                    else callback(null, user[0].Image);
+                    else callback(null, user[0].Photo);
                 });
             }
         });
@@ -57,7 +60,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select Photo From PhotosLocation where Id = ?;';
+                const sql = 'Select Photo from PhotosLocation where Id = ?;';
 
                 connection.query(sql, [id], (err, photo) => {
                     connection.release();
@@ -91,10 +94,11 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, Name, Direction, UserPhotos.IdPhoto, Image from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
+                const sql = 'Select User.Id, Name, Direction, UserPhotos.IdPhoto, User.Photo from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
 
                 connection.query(sql, [id], (err, photos) => {
                     connection.release();
+
                     if (err) new Error('Error de acceso a la base de datos: ' + err.message);
                     else callback(null, photos);
                 });
@@ -110,6 +114,7 @@ class DAOUsuario {
 
                 connection.query(sql, [idUser, idPhoto], (err) => {
                     connection.release();
+
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null);
                 });
@@ -125,6 +130,7 @@ class DAOUsuario {
 
                 connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
                     connection.release();
+
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, rows);
                 });
