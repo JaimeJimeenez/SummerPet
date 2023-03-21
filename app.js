@@ -74,7 +74,6 @@ app.get('/picturesLocation', (request, response) => {
     });
 });
 
-
 app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
     if (request.file) console.log(request.file);
     daoUsuario.enviarImagen(request.file.buffer, (err) => {
