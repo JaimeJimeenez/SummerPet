@@ -72,6 +72,9 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
 });
 */
 
-app.listen(process.env.port, () => {
+/*app.listen(process.env.port, () => {
+    console.log('Server listening at port: ' + config.port);
+});*/
+app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
