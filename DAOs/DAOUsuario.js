@@ -108,9 +108,8 @@ class DAOUsuario {
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
-                    console.log(specialties);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else callback(null, specialties[0]);
+                    else callback(null, specialties);
                 });
             }
         });

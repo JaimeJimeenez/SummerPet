@@ -120,6 +120,7 @@ app.get('/specialty', (request, response) => {
         request.response(400);
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
+        console.log( specialties);
         if (err) console.log(err);
         else response.render('specialties', { usuario : specialties });
     });

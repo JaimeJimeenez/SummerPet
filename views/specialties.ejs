@@ -28,7 +28,17 @@
                     <%- include('partials/navbars/navbarUser') %>
                 </div>
                 <div class = "row bg-black">
-                    <h1> HOLA</h1>
+                    <% console.log("entro") %>
+                    <% usuario.forEach((specialties) => { %>
+                        <%if ( specialties.Size == "grande") { %>
+                            <img src = "/images/perroGrande.png" alt = "Imagen de perro grande" width="250" height="250">
+                        <% } else if (specialties.Size == "mediano"){ %>
+                            <img src = "/images/perroMediano.png" alt = "Imagen de perro mediano" width="250" height="250" >
+                        <% } else { %>
+                            <img src = "/images/perroPequenio.png" alt = "Imagen de perro pequenio" width="250" height="250">
+                        <% } %>
+                    
+                    <% }) %>
                 </div>
             </div>
         </div>
