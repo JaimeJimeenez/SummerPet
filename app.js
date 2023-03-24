@@ -38,7 +38,7 @@ app.get('/', (request, response) => {
 app.get('/searchKeyWord', (request, response) => {
     daoUsuario.searchByKeyWord(request.query.keyword, (err, rows) => {
         if (err) console.log(err);
-        else response.render('search.ejs', { usuarios : rows });
+        else response.render('search', { usuarios : rows });
     });
 });
 
@@ -64,6 +64,7 @@ app.get('/profilePhoto/:id', (request, response) => {
     });
 });
 
+// Id del cuidador
 app.get('/picturesLocation', (request, response) => {
     let id = Number(request.query.id);
 
@@ -99,6 +100,7 @@ app.get('/picturesLocation', (request, response) => {
     }
 });
 
+// Id de las imagenes
 app.get('/photosLocation/:id', (request, response) => {
     let id = Number(request.params.id);
 
@@ -109,6 +111,33 @@ app.get('/photosLocation/:id', (request, response) => {
         if (err) console.log(err);
         else response.end(photo);
     });
+});
+
+app.get('/specialty', (request, response) => {
+    let id = Number(request.query.id);
+
+    if (isNaN(id)) {
+        request.response(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getSpecialties(id, (err, specialties) => {
+        console.log(specialties);
+        let races = specialties.Race.split(',');
+        console.log(races);
+
+        let user = {
+            Id: specialties.Id,
+            Name: specialties.Name,
+            Direction: specialties.Direction,
+            Photo: specialties.Photo,
+            DogSize: specialties.DogSize,
+            Races: races
+        };
+        console.log(user);
+
+        if (err) console.log(err);
+        else response.render('specialties', { usuario : user });
+    });
+
 });
 
 app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
