@@ -120,22 +120,8 @@ app.get('/specialty', (request, response) => {
         request.response(400);
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
-        console.log(specialties);
-        let races = specialties.Race.split(',');
-        console.log(races);
-
-        let user = {
-            Id: specialties.Id,
-            Name: specialties.Name,
-            Direction: specialties.Direction,
-            Photo: specialties.Photo,
-            DogSize: specialties.DogSize,
-            Races: races
-        };
-        console.log(user);
-
         if (err) console.log(err);
-        else response.render('specialties', { usuario : user });
+        else response.redirect('/');
     });
 
 });

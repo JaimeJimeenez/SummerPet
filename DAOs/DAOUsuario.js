@@ -104,10 +104,11 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, Name, Direction, User.Photo, Race, DogSize from User JOIN UserSpeciality ON User.Id = UserSpeciality.IdUser JOIN Dogsize ON UserSpeciality.IdSpeciality = Dogsize.Id JOIN Race ON UserSpeciality.IdSpeciality = Race.Id ON where User.Id = ?;';
+                const sql = 'Select User.Id, User.Name, Direction, User.Photo, Breed.Name, Size from User JOIN UserDogBreed ON UserDogBreed.IdUser = User.Id JOIN Breed ON Breed.Id = UserDogBreed.IdDogBreed JOIN UserDogSize ON UserDogSize.IdUser = User.Id JOIN DogSize ON UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
+                    console.log(specialties);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null, specialties[0]);
                 });
