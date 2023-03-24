@@ -121,7 +121,7 @@ app.get('/specialty', (request, response) => {
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
         if (err) console.log(err);
-        else response.redirect('/');
+        else response.render('specialties', { usuario : specialties });
     });
 
 });
