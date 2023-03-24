@@ -104,7 +104,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, Name, Direction, User.Photo, Race, DogSize from User JOIN UserSpecialty ON User.Id = UserSpecialty.IdUser JOIN Specialty ON Specialty.Id = UserSpecialty.IdSpecialty where User.Id = ?;';
+                const sql = 'Select User.Id, Name, Direction, User.Photo, Race, DogSize from User JOIN UserSpeciality ON User.Id = UserSpeciality.IdUser JOIN Dogsize ON UserSpeciality.IdSpeciality = Dogsize.Id JOIN Race ON UserSpeciality.IdSpeciality = Race.Id ON where User.Id = ?;';
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
