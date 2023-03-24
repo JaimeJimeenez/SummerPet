@@ -38,13 +38,13 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'SELECT Image FROM User WHERE Id = ?;';
+                const sql = 'SELECT Photo FROM User WHERE Id = ?;';
 
                 connection.query(sql, [id], (err, user) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else if (user.length === 0) callback(new Error('No existe'));
-                    else callback(null, user[0].Image);
+                    else callback(null, user[0].Photo);
                 });
             }
         });
