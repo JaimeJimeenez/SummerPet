@@ -64,7 +64,6 @@ app.get('/profilePhoto/:id', (request, response) => {
     });
 });
 
-// Id del cuidador
 app.get('/picturesLocation', (request, response) => {
     let id = Number(request.query.id);
 
@@ -100,7 +99,6 @@ app.get('/picturesLocation', (request, response) => {
     }
 });
 
-// Id de las imagenes
 app.get('/photosLocation/:id', (request, response) => {
     let id = Number(request.params.id);
 
@@ -120,9 +118,24 @@ app.get('/specialty', (request, response) => {
         request.response(400);
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
-        console.log( specialties);
+        let breeds = []; 
+        specialties.forEach((breed) => {
+            if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
+        });
+
+        let dogSizes = [];
+        specialties.forEach((dogSize) => dogSizes.push(dogSize.Size) );
+
+        let user = {
+            Id: specialties[0].Id,
+            Name: specialties[0].Name,
+            Direction: specialties[0].Direction,
+            Photo: specialties[0].Photo,
+            Breeds: breeds,
+            Sizes: dogSizes
+        };
         if (err) console.log(err);
-        else response.render('specialties', { usuario : specialties });
+        else response.render('specialties', { usuario : user });
     });
 
 });
