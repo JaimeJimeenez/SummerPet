@@ -118,27 +118,36 @@ app.get('/specialty', (request, response) => {
         request.response(400);
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
-        let breeds = []; 
-        specialties.forEach((breed) => {
-            if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
-        });
+        if (specialties.length === 0) {
+            daoUsuario.getUser(id, (err, user) => {
+                console.log(user);
+                if (err) console.log(err);
+                else response.render('specialties', { usuario : user });
+            });
+        }
+        else {
+            let breeds = []; 
+            specialties.forEach((breed) => {
+                if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
+            });
 
-        let dogSizes = [];
-        specialties.forEach((dogSize) => {
-            if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
-        });
-        // specialties.forEach((dogSize) => dogSizes.push(dogSize.Size) );
+            let dogSizes = [];
+            specialties.forEach((dogSize) => {
+                if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
+            });
 
-        let user = {
-            Id: specialties[0].Id,
-            Name: specialties[0].Name,
-            Direction: specialties[0].Direction,
-            Photo: specialties[0].Photo,
-            Breeds: breeds,
-            Sizes: dogSizes
-        };
-        if (err) console.log(err);
-        else response.render('specialties', { usuario : user });
+            let user = {
+                Id: specialties[0].Id,
+                Name: specialties[0].Name,
+                Direction: specialties[0].Direction,
+                Photo: specialties[0].Photo,
+                Breeds: breeds,
+                Sizes: dogSizes
+            };
+
+            if (err) console.log(err);
+            else response.render('specialties', { usuario : user });
+        }
     });
 
 });
