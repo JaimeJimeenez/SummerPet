@@ -124,7 +124,10 @@ app.get('/specialty', (request, response) => {
         });
 
         let dogSizes = [];
-        specialties.forEach((dogSize) => dogSizes.push(dogSize.Size) );
+        specialties.forEach((dogSize) => {
+            if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
+        });
+        // specialties.forEach((dogSize) => dogSizes.push(dogSize.Size) );
 
         let user = {
             Id: specialties[0].Id,
