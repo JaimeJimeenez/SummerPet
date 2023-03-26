@@ -28,10 +28,7 @@ class DAOUsuario {
                 connection.query(sql, [imagen], (err, result) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else this.insertUserPhoto(1, result.insertId, (err) => {
-                        if (err) callback(err);
-                        else callback(null);
-                    });
+                    else callback(null);
                 });
             }
         });
