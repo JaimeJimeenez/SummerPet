@@ -1,7 +1,7 @@
 describe('see carers accommodation for the pet test', () => {
     beforeEach(() => {
-      //cy.visit('https://summerpet.azurewebsites.net/');
-      cy.visit('http://localhost:3000');
+      cy.visit('https://summerpet.azurewebsites.net/');
+      //cy.visit('http://localhost:3000');
       cy.get('input').type(`${'jaime'}{enter}`);
       cy.get('a.btn.btn-primary').click()
     })
