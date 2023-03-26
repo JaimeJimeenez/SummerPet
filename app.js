@@ -48,6 +48,7 @@ app.get('/profile', (request, response) => {
         response.status(400);
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
+        console.log(user);
         if (err) console.log(err);
         else response.render('profile', { usuario : user });
     });
@@ -159,6 +160,7 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
         else response.redirect('/');
     });
 });
+*/
 
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
