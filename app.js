@@ -29,6 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded( { extended : true } ));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
@@ -110,6 +111,11 @@ app.get('/photosLocation/:id', (request, response) => {
         if (err) console.log(err);
         else response.end(photo);
     });
+});
+
+app.post('/sendApplication', (request, response) => {
+    console.log(request.body);
+    response.redirect('/');
 });
 
 app.get('/specialty', (request, response) => {
