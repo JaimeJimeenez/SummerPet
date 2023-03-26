@@ -12,6 +12,7 @@ const multer = require('multer');
 // File's Modules
 const config = require('./config');
 const DAOUsuario = require('./DAOs/DAOUsuario');
+const DAOApplication = require('./DAOs/DAOApplicaton');
 
 const multerFactory = multer( { storage : multer.memoryStorage() });
 
@@ -20,6 +21,7 @@ const pool = mysql.createPool(config.mysqlConfig);
 
 // Create daoUsuario 
 const daoUsuario = new DAOUsuario(pool);
+const daoApplication = new DAOApplication(pool);
 
 // Create server
 const app = express();
@@ -49,7 +51,6 @@ app.get('/profile', (request, response) => {
         response.status(400);
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
-        console.log(user);
         if (err) console.log(err);
         else response.render('profile', { usuario : user });
     });
@@ -114,8 +115,17 @@ app.get('/photosLocation/:id', (request, response) => {
 });
 
 app.post('/sendApplication', (request, response) => {
-    console.log(request.body);
-    response.redirect('/');
+    let idDogWatcher = request.body.idDogWatcher;
+    let startDate = request.body.startDate;
+    let endDate = request.body.endDate;
+
+    daoApplication.newApplication(idDogWatcher, new Date(startDate), new Date(endDate), (err) => {
+        if (err) console.log(err);
+        else daoUsuario.getUser(idDogWatcher, (err, user) => {
+            if (err) console.log(err);
+            else response.render('profile', { usuario : user });
+        });
+    });
 });
 
 app.get('/specialty', (request, response) => {
