@@ -18,13 +18,18 @@
                     <label for = "endDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Fecha de fin: </label>
                     <input type = "text" class = 'form-control w-50' id = 'endDate' name = 'endDate'>
                 </div>
+
+                <div class = "row d-none align-items-center justify-content-center" id = 'errorApplication'>
+                  <span class = 'text-danger text-center'> Fechas introducidas incorrectas </span>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type = 'submit' class = 'btn btn-primary'> Enviar solicitud </button>
-                <button type = "button" class = "btn btn-danger" data-bs-dismiss="modal"> Cancelar </button>
+
+            <div class="modal-footer">  
+              <button type = 'submit' class = 'btn btn-primary' id = 'applicationButton' disabled> Enviar solicitud </button>
+              <button type = "button" class = "btn btn-danger" data-bs-dismiss="modal"> Cancelar </button>
             </div>
         </form>
       </div>
       
-    </div>
   </div>
+</div>
