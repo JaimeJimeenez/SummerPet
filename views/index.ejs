@@ -13,18 +13,19 @@
 </head>
 <body>
     <nav class = 'navbar bg-dark navbar-dark'>
-        <div class = "container-fluid">
+        <div class = "container-fluid d-flex justify-content-start">
             <a class = 'navbar-brand' href = "/">
                 <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
             </a>
+            <h1 class ="mt-1 text-white "> SummerPet</h1>
         </div>
     </nav>
-    <div id = "searchbardiv" class = "bg-black">
-        <div  class = "bg-danger">
+    <div id = "searchbardiv" >
+        <div>
             <form method = 'GET' action = 'searchKeyWord' class = 'd-flex'>
                 <label for = "keyword"></label>
-                <input class="p-4 form-control form-control-lg" id = "input" type="text" list="datalistOptions" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
-                <button class="btn btn-primary m-5" type = "submit">Search</button>
+                <input class = "form-control form-control-lg me-3" id = "input" type="text" list="datalistOptions" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
+                <button id = "search" class="btn btn-primary" type = "submit">Search</button>
             </form>
         </div>
         <datalist id="datalistOptions">

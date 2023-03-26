@@ -17,4 +17,11 @@ li {
 #input{
     width: 600px;
     height: 80px;
+    font-size: 22px;
+}
+
+#search{
+    width: 100px;
+    height: 80px;
+    font-size: 22px;
 }
