@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" media="screen" href="solScreen.css">
+	<link rel="stylesheet" type="text/css" media="print" href="css/solPrint.css">
+	<script src="/Root/PV4/routes/REQTasks.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title>SummerPet</title>
+</head>
+<meta charset="utf-8" />
+<link rel="icon" type="image/x-ico"
+	href="https://www.learningcontainer.com/wp-content/uploads/2020/09/Sample-ICO-file-Download-for-testing.ico">
+<h12>SUMMERPET-SOLICITUDES</h12>
+</head>
+
+<body>
+	<div class="estructura cabecera">
+		<div class="estructura icono">
+			<img src="https://upload.wikimedia.org/wikipedia/donate/4/4f/Museum_Icon_local.png" height="48" width="64"
+				alt="icono">
+		</div>
+		<div class="estructura caja-derecha">
+			<p class="estructura datos">
+				<a class="a1" href=>profile-name-placeholder</a>
+			</p>
+			<div class="estructura usuario">
+				<img src="https://www.softzone.es/app/uploads-softzone.es/2018/04/guest.png" height="50" width="50"
+					alt="usr">
+			</div>
+			<div class="boton">
+				<button class="boton1" onclick="window.location.href='/logOut';"> Desconectar</button>
+			</div>
+		</div>
+		<div>
+			<form class="search_form" action="/search" method="POST">
+				<input class="search_form" type="text" name="text" placeholder="Buscar" required>
+				<input class="task_button search_form" type="submit" value="BUSCAR">
+			</form>
+		</div>
+		<h2>Mis solicitudes</h2>
+	</div>
+	<main>
+		<div class="own">
+			<table class="table table-bordered table-responsive">
+				<thead>
+					<tr>
+						<th scope="col">Fecha</th>
+						<th scope="col">Cuidador</th>
+						<th scope="col">Texto</th>
+						<th scope="col">estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% solicitations.forEach(function(sol, i) { %>
+						<% if (!sol.done) { %>
+							<tr>
+								<th scope="row">
+									<%= sol.date %>
+								</th>
+								<td>
+									<%= sol.name %>
+								</td>
+								<td>
+									<%= sol.text %>
+								</td>
+								<td>
+									<%= sol.status %>
+								</td>
+							</tr>
+							<% } %>
+								<% }); %>
+				</tbody>
+			</table>
+		</div>
+		<div id="s1" class="add">
+			<form class="add_form" action="/addTask" method="POST">
+				<input class="task_button add_button" type="submit" value="NUEVA SOLICITUD">
+			</form>
+		</div>
+	</main>
+</body>
+
+</html>
