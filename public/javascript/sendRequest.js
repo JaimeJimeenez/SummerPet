@@ -1,6 +1,7 @@
 'use strict'
 
 $(function() {
+    let actualDate = new Date();
     let start;
     let end;
 
@@ -9,10 +10,9 @@ $(function() {
         end = new Date($('#endDate').val());
         
         if (end !== null) {
-            if (start <= end) {
+            if (start <= end && actualDate <= start) {
                 $('#applicationButton').attr('disabled', false);
                 $('#errorApplication').addClass('d-none');
-                console.log('Todo ok');
             } else {
                 $('#errorApplication').removeClass('d-none');
                 $('#applicationButton').attr('disabled', true);
@@ -25,7 +25,7 @@ $(function() {
         end = new Date($('#endDate').val());
         
         if (start !== null) {
-            if (start <= end) {
+            if (start <= end && actualDate <= start) {
                 $('#applicationButton').attr('disabled', false);
                 $('#errorApplication').addClass('d-none');
                 console.log('Todo ok');
