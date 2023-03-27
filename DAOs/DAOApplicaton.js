@@ -37,6 +37,7 @@ class DAOApplication {
             }
         });
     }
+    
     listApplications(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
