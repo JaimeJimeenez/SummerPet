@@ -23,6 +23,21 @@ class DAOApplication {
         });
     }
 
+    getApplication(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from Application where Id = ?;';
+
+                connection.query(sql, [id], (err, application) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, application[0]);
+                });
+            }
+        });
+    }
+
     insertUserApplication(idOwner, idDogWatcher, idApplication, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
@@ -42,7 +57,7 @@ class DAOApplication {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'select Name, Direction, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication order by a.StartDate ASC';
+                const sql = 'select Name, Direction, a.Id, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication order by a.StartDate ASC';
                 
 
                 connection.query(sql, [id], (err, rows) => {

@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const mysql = require('mysql');
 const express = require('express');
 const multer = require('multer');
+const moment = require('moment');
 
 // File's Modules
 const config = require('./config');
@@ -189,12 +190,32 @@ app.get('/applications', (request, response) => {
                 if (err) console.log(err);
                 else{
                     user.applications=applications;
+                    console.log(user);
                     response.render('applications', {usuario: user});
                 }
             }) 
         } 
     });
 });
+
+app.get('/getApplication/:id', (request, response, next) => {
+    response.status(200);
+    let id = Number(request.params.id);
+
+    console.log(id);
+    if (!isNaN(id) && id >= 0) {
+        daoApplication.getApplication(id, (err, application) => {
+            if (err) next(err);
+            else {
+                response.json( { application : application });
+            }
+        });
+    } else {
+        response.status(400);
+        response.end();
+    }
+});
+
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
