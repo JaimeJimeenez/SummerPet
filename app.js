@@ -176,7 +176,25 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
         else response.redirect('/');
     });
 });
+app.get('/applications', (request, response) => {
+    let id = Number(request.query.id);
 
+    if (isNaN(id)) {
+        request.response(400);
+        response.end('Incorrect petition');
+    } else daoUsuario.getUser(id, (err, user) => {
+        if (err) console.log(err);
+        else{
+            daoApplication.listApplications(id, (err, applications)=>{
+                if (err) console.log(err);
+                else{
+                    user.applications=applications;
+                    response.render('applications', {usuario: user});
+                }
+            }) 
+        } 
+    });
+});
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });

@@ -37,6 +37,21 @@ class DAOApplication {
             }
         });
     }
+    listApplications(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'select Name, Direction, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication order by a.StartDate ASC';
+                
+
+                connection.query(sql, [id], (err, rows) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, rows);
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOApplication;
