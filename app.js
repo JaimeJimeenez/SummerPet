@@ -12,6 +12,7 @@ const multer = require('multer');
 // File's Modules
 const config = require('./config');
 const DAOUsuario = require('./DAOs/DAOUsuario');
+const DAOApplication = require('./DAOs/DAOApplicaton');
 
 const multerFactory = multer( { storage : multer.memoryStorage() });
 
@@ -20,6 +21,7 @@ const pool = mysql.createPool(config.mysqlConfig);
 
 // Create daoUsuario 
 const daoUsuario = new DAOUsuario(pool);
+const daoApplication = new DAOApplication(pool);
 
 // Create server
 const app = express();
@@ -29,6 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.urlencoded( { extended : true } ));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 app.use(morgan('dev'));
 
 app.get('/', (request, response) => {
@@ -108,6 +111,20 @@ app.get('/photosLocation/:id', (request, response) => {
     } else daoUsuario.getPhotoLocation(id, (err, photo) => {
         if (err) console.log(err);
         else response.end(photo);
+    });
+});
+
+app.post('/sendApplication', (request, response) => {
+    let idDogWatcher = request.body.idDogWatcher;
+    let startDate = request.body.startDate;
+    let endDate = request.body.endDate;
+
+    daoApplication.newApplication(idDogWatcher, new Date(startDate), new Date(endDate), (err) => {
+        if (err) console.log(err);
+        else daoUsuario.getUser(idDogWatcher, (err, user) => {
+            if (err) console.log(err);
+            else response.render('profile', { usuario : user });
+        });
     });
 });
 
