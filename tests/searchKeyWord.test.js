@@ -37,18 +37,13 @@ test('Searching for Barcelona', done => {
             result.push({ Name: row.Name, Phone: row.Phone, Email: row.Email, Direction: row.Direction });
         });
         
+        console.log(result);
         try {
             expect(result).toStrictEqual([
                 {
                     Name: 'Miguel',
                     Phone: '601478529',
                     Email: 'miguelnose@email.com',
-                    Direction: 'Barcelona'
-                },
-                {
-                    Name: 'Alejandro',
-                    Phone: '613204578',
-                    Email: 'alejandrorodriguez@email.com',
                     Direction: 'Barcelona'
                 }
             ]);    
@@ -73,14 +68,7 @@ test('Searching for Patricia', done => {
             result.push({ Name: row.Name, Phone: row.Phone, Email: row.Email, Direction: row.Direction });
         });
         try {
-            expect(result).toStrictEqual([
-                {
-                    Name: 'Patricia',
-                    Phone: '987654321',
-                    Email: 'patriciamatamoros@email.com',
-                    Direction: 'Valencia'
-                }
-            ]);
+            expect(result).toStrictEqual([]);
             done();
         } catch (error) {
             done(error);

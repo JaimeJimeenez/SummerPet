@@ -1,0 +1,21 @@
+<div class = "col col-sm-4 col-md-4 col-xl-4">
+    <% if (!usuario.Photo) { %>
+        <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="250" height="250">
+    <% } else { %>
+        <img src = "/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="250" height="250" class = 'rounded-circle'>
+    <% } %>
+    <div class = 'row mt-2'>
+
+        <div class = "col col-sm col-md col-xl h3">
+
+            <div id = 'profileName' class = "row"> <%= usuario.Name %> </div>
+            <div id = 'profileDirection' class = "row h5"> <%= usuario.Direction %> </div>
+
+            <% if (usuario.hasAcceptedApplication) { %>
+                <div class = 'row h6' id = 'profileEmail'> Email: <%= usuario.Email %></div>
+                <div class = 'row h6' id = 'profilePhone'> Teléfono: <%= usuario.Phone %></div>
+            <% } %>
+
+        </div>
+    </div>
+</div>

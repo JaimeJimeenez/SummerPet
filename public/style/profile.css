@@ -1,0 +1,15 @@
+#profileUser {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#navUser {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+#description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
