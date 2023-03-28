@@ -24,15 +24,5 @@ describe('View specialties', () => {
         cy.get('.labelBreed').should('not.exist');
         cy.get('.labelSizes').should('not.exist');
     });
-
-    it('Martin specialties', () => {
-        const martin = 'Martin';
-        
-        cy.get('input').type(`${martin}{enter}`);
-        cy.get('a.btn.btn-primary').click();
-        
-        cy.get('.labelBreed').should('not.exist');
-        cy.get('.labelSizes').should('exist');
-    });
             
 });

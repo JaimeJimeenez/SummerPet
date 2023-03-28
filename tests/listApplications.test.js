@@ -65,13 +65,6 @@ test('List applications', done => {
             
             expect(result).toStrictEqual([
                 {
-                    Id: 1,
-                    Name: 'Maria',
-                    Direction: 'Madrid',
-                    StartDate: '2023-04-06',
-                    FinalDate: '2023-04-08',
-                },
-                {
                     Id: 4,
                     Name: 'Maria',
                     Direction: 'Madrid',
@@ -86,5 +79,5 @@ test('List applications', done => {
         }
     }
 
-    daoApplication.listApplications(1, callback1);
+    daoApplication.listApplications(5, callback1);
 });

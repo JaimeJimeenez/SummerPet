@@ -29,6 +29,7 @@ test('Accepted one application', done => {
             }
 
             daoApplication.getApplication(1, callback2);
+            daoApplication.declineApplication(1, () => { done(); });
             done();
         } catch(error) {
             done(error);
@@ -36,4 +37,5 @@ test('Accepted one application', done => {
     }
 
     daoApplication.acceptApplication(1, callback1);
+    
 });

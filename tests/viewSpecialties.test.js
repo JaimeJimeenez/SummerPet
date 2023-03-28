@@ -3,24 +3,25 @@
 const mysql = require('mysql');
 const config = require('../config');
 
-const DAOApplication = require('../DAOs/DAOApplicaton');
+const DAOUsuario = require('../DAOs/DAOUsuario');
 
 const pool = mysql.createPool(config.mysqlConfig);
-const daoApplication = new DAOApplication(pool);
+const daoUsuario = new DAOUsuario(pool);
 
-test('Send one application', done => {
+test('No specialties', done => {
     function callback(error, data) {
         if (error) {
             done(error);
             return;
         }
+        
         try {
-            expect(data).toBe(true);
+            expect(data).toStrictEqual([]);    
             done();
-        } catch(error) {
+        } catch (error) {
             done(error);
         }
     }
 
-    daoApplication.newApplication(1, new Date('2023-04-08'), new Date('2023-04-10'), callback);
+    daoUsuario.getSpecialties(3, callback);
 });
