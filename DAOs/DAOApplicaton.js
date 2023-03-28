@@ -68,6 +68,36 @@ class DAOApplication {
             }
         });
     }
+
+    acceptApplication(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Update Application set Accepted = 1 where Id = ?;';
+
+                connection.query(sql, [id], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
+
+    deleteApplication(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Update Application set Active = 0 where Id = ?;';
+
+                connection.query(sql, [id], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOApplication;
