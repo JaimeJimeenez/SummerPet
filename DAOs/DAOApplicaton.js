@@ -8,7 +8,7 @@ class DAOApplication {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Insert into Application (StartDate, FinalDate, Accepted) values (?, ?, 0);';
+                const sql = 'Insert into Application (StartDate, FinalDate, Accepted, Active) values (?, ?, 0, 1);';
 
                 connection.query(sql, [startDate, endDate], (err, result) => {
                     connection.release();
@@ -57,7 +57,7 @@ class DAOApplication {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'select Name, Direction, a.Id, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication order by a.StartDate ASC';
+                const sql = 'select Name, Direction, a.Id, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication and Accepted = 0 and a.Active = 1 order by a.StartDate ASC';
                 
 
                 connection.query(sql, [id], (err, rows) => {

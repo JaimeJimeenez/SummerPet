@@ -216,6 +216,23 @@ app.get('/getApplication/:id', (request, response, next) => {
     }
 });
 
+app.get('/acceptApplication/:id', (request, response) => {
+    response.status(200);
+    let id = Number(request.params.id);
+
+    console.log(id);
+    console.log('Estoy en accept application');
+    if (!isNaN(id) && id >= 0) {
+        daoApplication.acceptApplication(id, (err) => {
+            if (err) console.log(err);
+            else response.json({ });
+        });
+    } else {
+        response.status(400);
+        response.end();
+    }
+});
+
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });

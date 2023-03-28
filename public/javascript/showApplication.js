@@ -7,6 +7,7 @@ $(document).on('click', '.btn-secondary', function() {
       url: 'getApplication/' + id,
       type: 'GET',
       success: function(response) {
+        console.log(response);
         const startDate = response.application.StartDate;
         const finalDate = response.application.FinalDate;
         
@@ -31,9 +32,28 @@ $(document).on('click', '.btn-secondary', function() {
         $('#start').datepicker('setDate', start);
         $('#final').datepicker('setDate', final);
         
+        $('#acceptButton').data('id', response.application.Id);
+        $('#deleteButton').data('id', response.application.Id);
+
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
       }
     });
+});
+
+
+$(document).on('click', '.btn-success', function() {
+  const id = $(this).data('id');
+
+  $.ajax({
+    url: 'acceptApplication/' + id,
+    type: 'GET',
+    success: function(response) {
+      location.reload();
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
+    }
+  });
 });
