@@ -273,6 +273,7 @@ app.get('/acceptApplication/:id', (request, response) => {
     console.log('Server listening at port: ' + config.port);
 });*/
 
+
 app.listen(process.env.PORT, () => {
     console.log('Server listening at port: ' + config.port);
 });
