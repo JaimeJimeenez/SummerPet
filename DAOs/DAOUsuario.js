@@ -8,7 +8,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'SELECT * FROM User Where Id = ?';
+                const sql = 'Select *, count(*) from User Where Id = ?';
 
                 connection.query(sql, [id], (err, user) => {
                     connection.release();
@@ -86,7 +86,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, Name, Direction, UserPhotos.IdPhoto, User.Photo from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
+                const sql = 'Select User.Id, Name, Direction, Phone, Email, UserPhotos.IdPhoto, User.Photo from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
 
                 connection.query(sql, [id], (err, photos) => {
                     connection.release();
@@ -101,7 +101,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, User.Name, Direction, User.Photo, Breed.Name AS BreedName, Size from User JOIN UserDogBreed ON UserDogBreed.IdUser = User.Id JOIN Breed ON Breed.Id = UserDogBreed.IdDogBreed JOIN UserDogSize ON UserDogSize.IdUser = User.Id JOIN DogSize ON UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
+                const sql = 'Select User.Id, User.Name, Direction, Phone, Email, User.Photo, Breed.Name AS BreedName, Size from User JOIN UserDogBreed ON UserDogBreed.IdUser = User.Id JOIN Breed ON Breed.Id = UserDogBreed.IdDogBreed JOIN UserDogSize ON UserDogSize.IdUser = User.Id JOIN DogSize ON UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
@@ -131,7 +131,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Select * from User Where (instr(Name, ?) or instr(Phone, ?) or instr(Email, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1;';
+                const sql = 'Select * from User Where (instr(Name, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1;';
 
                 connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
                     connection.release();

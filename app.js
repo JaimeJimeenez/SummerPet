@@ -53,7 +53,16 @@ app.get('/profile', (request, response) => {
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else response.render('profile', { usuario : user });
+        else {
+            daoApplication.hasAcceptedApplication(2, id, (err, hasAcceptedApplication) => {
+                if (err) console.log(err);
+                else {
+                    user.hasAcceptedApplication = hasAcceptedApplication;
+                    response.render('profile', { usuario : user });
+                }
+            });
+            
+        } 
     });
 });
 
@@ -80,23 +89,36 @@ app.get('/picturesLocation', (request, response) => {
             else if (havePhotos) {
                 daoUsuario.getPhotosLocation(id, (err, rows) => {
                     if (err) console.log(err);
-                    else {
-                        let photos = [];
-                        rows.forEach((user) => photos.push(user.IdPhoto));
-                        let user = {
-                            Id: rows[0].Id,
-                            Photo: rows[0].Photo,
-                            Name: rows[0].Name,
-                            Direction: rows[0].Direction,
-                            Photos: photos
-                        };
-                        response.render('locationPhotos', { usuario : user });
-                    }
+                    else daoApplication.hasAcceptedApplication(2, id, (err, hasAcceptedApplication) => {
+                        if (err) console.log(err);
+                        else {
+                            let photos = [];
+                            rows.forEach((user) => photos.push(user.IdPhoto));
+                            let user = {
+                                Id: rows[0].Id,
+                                Photo: rows[0].Photo,
+                                Name: rows[0].Name,
+                                Direction: rows[0].Direction,
+                                Phone: rows[0].Phone,
+                                Email: rows[0].Email,
+                                Photos: photos,
+                                hasAcceptedApplication: hasAcceptedApplication
+                            };
+                            console.log(user);
+                            response.render('locationPhotos', { usuario : user });
+                        }  
+                    });
                 });
             } else {
                 daoUsuario.getUser(id, (err, user) => {
                     if (err) console.log(err);
-                    else response.render('locationPhotos', { usuario : user });
+                    else daoApplication.hasAcceptedApplication(2, id, (err, hasAcceptedApplication) => {
+                        if (err) console.log(err);
+                        else {
+                            user.hasAcceptedApplication = hasAcceptedApplication;
+                            response.render('locationPhotos', { usuario : user });    
+                        }
+                    }); 
                 });
             }
         });
@@ -136,36 +158,44 @@ app.get('/specialty', (request, response) => {
         request.response(400);
         response.end('Incorrect petition');
     } else daoUsuario.getSpecialties(id, (err, specialties) => {
-        if (specialties.length === 0) {
-            daoUsuario.getUser(id, (err, user) => {
-                console.log(user);
+        if (err) console.log(err)
+        else daoApplication.hasAcceptedApplication(2, id, (err, hasAcceptedApplication) => {
+            if (err) console.log(err);
+            else if (specialties.length === 0) {
+                daoUsuario.getUser(id, (err, user) => {
+                    if (err) console.log(err);
+                    else {
+                        user.hasAcceptedApplication = hasAcceptedApplication;
+                        response.render('specialties', { usuario : user });
+                    }
+                });
+            } else {
+                let breeds = []; 
+                specialties.forEach((breed) => {
+                    if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
+                });
+
+                let dogSizes = [];
+                specialties.forEach((dogSize) => {
+                    if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
+                });
+
+                let user = {
+                    Id: specialties[0].Id,
+                    Name: specialties[0].Name,
+                    Direction: specialties[0].Direction,
+                    Photo: specialties[0].Photo,
+                    Email: specialties[0].Email,
+                    Phone: specialties[0].Phone,
+                    Breeds: breeds,
+                    Sizes: dogSizes,
+                    hasAcceptedApplication : hasAcceptedApplication
+                };
+
                 if (err) console.log(err);
                 else response.render('specialties', { usuario : user });
-            });
-        }
-        else {
-            let breeds = []; 
-            specialties.forEach((breed) => {
-                if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
-            });
-
-            let dogSizes = [];
-            specialties.forEach((dogSize) => {
-                if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
-            });
-
-            let user = {
-                Id: specialties[0].Id,
-                Name: specialties[0].Name,
-                Direction: specialties[0].Direction,
-                Photo: specialties[0].Photo,
-                Breeds: breeds,
-                Sizes: dogSizes
-            };
-
-            if (err) console.log(err);
-            else response.render('specialties', { usuario : user });
-        }
+            }
+        });
     });
 
 });
@@ -177,6 +207,7 @@ app.post("/enviarImagen", multerFactory.single('foto'), function(request, respon
         else response.redirect('/');
     });
 });
+
 app.get('/applications', (request, response) => {
     let id = Number(request.query.id);
 
@@ -185,16 +216,20 @@ app.get('/applications', (request, response) => {
         response.end('Incorrect petition');
     } else daoUsuario.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else{
-            daoApplication.listApplications(id, (err, applications)=>{
-                if (err) console.log(err);
-                else{
-                    user.applications=applications;
-                    console.log(user);
-                    response.render('applications', {usuario: user});
-                }
-            }) 
-        } 
+        else daoApplication.hasAcceptedApplication(2, id, (err, hasAcceptedApplication) => {
+            if (err) console.log(err);
+            else {
+                user.hasAcceptedApplication = hasAcceptedApplication;
+                daoApplication.listApplications(id, (err, applications) => {
+                    if (err) console.log(err);
+                    else {
+                        user.applications = applications;
+                        console.log(user);
+                        response.render('applications', { usuario : user });
+                    }
+                });
+            }
+        }); 
     });
 });
 

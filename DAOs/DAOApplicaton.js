@@ -84,16 +84,17 @@ class DAOApplication {
         });
     }
 
-    deleteApplication(id, callback) {
+    hasAcceptedApplication(idOwner, idDogWatcher, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Update Application set Active = 0 where Id = ?;';
+                const sql = 'Select count(*) from Application join UserApplication on IdOwner = ? and IdDogWatcher = ? and IdApplication = Id where Accepted = 1 and Active = 1;';
 
-                connection.query(sql, [id], (err) => {
+                connection.query(sql, [idOwner, idDogWatcher], (err, result) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else callback(null);
+                    else if (result[0]['count(*)'] === 0) callback(null, false);
+                    else callback(null, true);
                 });
             }
         });
