@@ -29,7 +29,7 @@ describe('Show carer profile details', () => {
     daoUsuario.searchByKeyWord('Jaime', callback);
   });
 
-  test('Displays name, location, and generic pic for Maria', done => {
+  test('Displays name, location, and generic pic for Maria, whos an owner', done => {
     function callback(error, data) {
       if (error) {
         done(error);
@@ -38,9 +38,7 @@ describe('Show carer profile details', () => {
       try {
         const usuario = data.find(u => u.Name === 'Maria');
         
-        expect(usuario).toBeDefined();
-        expect(usuario.Photo).toBe(null);
-        expect(usuario.Direction).toBe('Madrid');
+        expect(data).toStrictEqual([]);
         done();
       } catch(error) {
         done(error);

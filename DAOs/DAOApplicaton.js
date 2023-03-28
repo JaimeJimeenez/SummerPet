@@ -12,11 +12,10 @@ class DAOApplication {
 
                 connection.query(sql, [startDate, endDate], (err, result) => {
                     connection.release();
-                    console.log(result);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else this.insertUserApplication(2, id, result.insertId, (err) => {
                         if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                        else callback(null);
+                        else callback(null, true);
                     });
                 });
             }

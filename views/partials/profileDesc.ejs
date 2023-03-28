@@ -12,8 +12,8 @@
             <div id = 'profileDirection' class = "row h5"> <%= usuario.Direction %> </div>
 
             <% if (usuario.hasAcceptedApplication) { %>
-                <div class = 'row h6'> Email: <%= usuario.Email %></div>
-                <div class = 'row h6'> Teléfono: <%= usuario.Phone %></div>
+                <div class = 'row h6' id = 'profileEmail'> Email: <%= usuario.Email %></div>
+                <div class = 'row h6' id = 'profilePhone'> Teléfono: <%= usuario.Phone %></div>
             <% } %>
 
         </div>

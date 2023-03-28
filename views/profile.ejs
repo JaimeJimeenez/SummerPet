@@ -12,7 +12,6 @@
 
     <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel = "stylesheet" href = "../style/profile.css">
-    <link rel = "stylesheet" href = "../style/navbar.css">
     <link rel = "stylesheet" href = "../style/Specialties.css">
     <link href = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
 
@@ -49,7 +48,7 @@
                    </div>
                    <%if(usuario.Description == null){%>
                         <div>
-                            <p class = "text-justify text-break bg-danger text-white p-3 rounded-2"> <%= usuario.Name %> aun no ha añadido una descripción </p>
+                            <p class = "text-justify text-break bg-danger text-white p-3 rounded-2" id = 'noDescription'> <%= usuario.Name %> aun no ha añadido una descripción </p>
                         </div>
                     <%}else{%>
                         <div>

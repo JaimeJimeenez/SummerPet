@@ -23,7 +23,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
             else {
-                const sql = 'update User set Photo = ? where Id = 1;';
+                const sql = 'update User set Photo = ? where Id = 3;';
 
                 connection.query(sql, [imagen], (err, result) => {
                     connection.release();
@@ -105,6 +105,7 @@ class DAOUsuario {
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
+                    console.log(specialties);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null, specialties);
                 });
