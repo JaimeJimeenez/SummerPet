@@ -12,7 +12,8 @@ const moment = require('moment');
 
 // File's Modules
 const config = require('./config');
-const DAOUsuario = require('./DAOs/DAOUsuario');
+const index = require('./routes/index');
+const DAOUsuario = require('./DAOs/DAOUser');
 const DAOApplication = require('./DAOs/DAOApplicaton');
 
 const multerFactory = multer( { storage : multer.memoryStorage() });
@@ -35,16 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/', (request, response) => {
-    response.render('index.ejs');
-});
-
-app.get('/searchKeyWord', (request, response) => {
-    daoUsuario.searchByKeyWord(request.query.keyword, (err, rows) => {
-        if (err) console.log(err);
-        else response.render('search', { usuarios : rows });
-    });
-});
+app.use('/', index.router);
 
 app.get('/profile', (request, response) => {
     let id = Number(request.query.id);
@@ -269,11 +261,10 @@ app.get('/acceptApplication/:id', (request, response) => {
 });
 
 
-/*app.listen(config.port, () => {
-    console.log('Server listening at port: ' + config.port);
-});*/
-
-
-app.listen(process.env.PORT, () => {
+app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
+
+/*app.listen(process.env.PORT, () => {
+    console.log('Server listening at port: ' + config.port);
+});*/
