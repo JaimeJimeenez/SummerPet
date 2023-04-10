@@ -3,7 +3,7 @@
 // File's Modules
 const config = require('../config');
 const DAOUser = require('../DAOs/DAOUser');
-const DAOApplication = require('../DAOs/DAOApplicaton');
+const DAOApplication = require('../DAOs/DAOApplication');
 
 // Package's modules
 const express = require('express');

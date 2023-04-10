@@ -18,7 +18,7 @@ const index = require('./routes/index');
 const user = require('./routes/user');
 const application = require('./routes/application');
 const DAOUsuario = require('./DAOs/DAOUser');
-const DAOApplication = require('./DAOs/DAOApplicaton');
+const DAOApplication = require('./DAOs/DAOApplication');
 
 const multerFactory = multer( { storage : multer.memoryStorage() });
 
