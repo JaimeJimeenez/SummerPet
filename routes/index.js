@@ -14,6 +14,7 @@ const router = express.Router();
 // DAO's instances
 const daoUser = new DAOUser(pool);
 
+// ---------------------
 router.get('/', (request, response, next) => {
     response.render('index');
 });

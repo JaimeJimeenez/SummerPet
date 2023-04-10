@@ -1,6 +1,6 @@
 'use strict'
 
-class DAOUsuario {
+class DAOUser {
 
     constructor(pool) { this.pool = pool; }
 
@@ -86,7 +86,7 @@ class DAOUsuario {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select User.Id, Name, Direction, Phone, Email, UserPhotos.IdPhoto, User.Photo from User JOIN UserPhotos ON User.Id = UserPhotos.IdUser JOIN PhotosLocation ON PhotosLocation.Id = UserPhotos.IdPhoto where User.Id = ?;';
+                const sql = 'Select IdPhoto from UserPhotos where IdUser = ?';
 
                 connection.query(sql, [id], (err, photos) => {
                     connection.release();
@@ -144,4 +144,4 @@ class DAOUsuario {
     }
 }
 
-module.exports = DAOUsuario;
+module.exports = DAOUser;

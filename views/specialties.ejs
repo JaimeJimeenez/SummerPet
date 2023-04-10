@@ -51,8 +51,8 @@
                         </div>
                     
                         <div class = "row">
-                            <% if (usuario.hasOwnProperty('Breeds')) { %>
-                                <% usuario.Breeds.forEach((dogBreed) => { %>  
+                            <% if (breeds.length !== 0) { %>
+                                <% breeds.forEach((dogBreed) => { %>  
                                     <div class = "bg-light offset-1 col col-sm col-md col-xl d-flex justify-content-center text-center align-items-center mt-4 rounded-2 labelBreed">
                                         <h6 class =" p-3"> <%= dogBreed %> </h4>
                                     </div>
@@ -75,8 +75,8 @@
                         
                         <div class = "row">
 
-                            <% if (usuario.hasOwnProperty('Sizes')) { %>
-                                <% usuario.Sizes.forEach((dogSize) => { %>
+                            <% if (dogSizes.length !== 0) { %>
+                                <% dogSizes.forEach((dogSize) => { %>
                                     <div class = "row mt-2 d-flex justify-content-center">
                                         <div class = "col col-sm-6 col-md-6 col-xl-6 d-flex justify-content-center bg-light rounded-2 labelSizes">
                                             <div class="col col-sm-6 col-md-6 col-xl-6 mt-3">
