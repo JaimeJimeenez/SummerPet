@@ -97,6 +97,36 @@ class DAOUser {
         });
     }
 
+    getDogSizes(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select Dogsize.Size from User join userdogsize on userdogsize.Iduser = User.Id join dogsize on UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
+
+                connection.query(sql, [id], (err, dogSizes) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, dogSizes);
+                });
+            }
+        });
+    }
+
+    getDogBreeds(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select Breed.Name from User join userdogbreed on userdogbreed.Iduser = User.Id join Breed on userdogbreed.IdDogBreed = Breed.Id where User.Id = ?;';
+
+                connection.query(sql, [id], (err, breeds) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, breeds);
+                });
+            }
+        });
+    }
+
     getSpecialties(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
@@ -105,7 +135,6 @@ class DAOUser {
 
                 connection.query(sql, [id], (err, specialties) => {
                     connection.release();
-                    console.log(specialties);
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null, specialties);
                 });

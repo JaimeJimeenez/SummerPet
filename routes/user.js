@@ -87,22 +87,12 @@ router.get('/specialties', (request, response) => {
         if (err) console.log(err);
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
-            else daoUser.getSpecialties(id, (err, specialties) => {
+            else daoUser.getDogSizes(id, (err, dogSizes) => {
                 if (err) console.log(err);
-                else {
-                    let breeds = [];
-                    let dogSizes = [];
-
-                    specialties.forEach((breed) => {
-                        if (breeds.indexOf(breed.BreedName) === -1) breeds.push(breed.BreedName);
-                    });
-
-                    specialties.forEach((dogSize) => {
-                        if (dogSizes.indexOf(dogSize.Size) === -1) dogSizes.push(dogSize.Size);
-                    });
-
-                    response.render('specialties', { usuario : user, breeds : breeds, dogSizes : dogSizes, accepted : accepted });
-                }
+                else daoUser.getDogBreeds(id, (err, breeds) => {
+                    if (err) console.log(err);
+                    else response.render('specialties', { usuario : user, breeds : breeds, dogSizes : dogSizes, accepted : accepted });
+                });
             });
         });
     });

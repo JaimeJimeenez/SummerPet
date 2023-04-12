@@ -7,8 +7,6 @@ const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
 const express = require('express');
-const multer = require('multer');
-const moment = require('moment');
 const session = require('express-session');
 const mysqlsession = require('express-mysql-session');
 
@@ -17,17 +15,6 @@ const config = require('./config');
 const index = require('./routes/index');
 const user = require('./routes/user');
 const application = require('./routes/application');
-const DAOUsuario = require('./DAOs/DAOUser');
-const DAOApplication = require('./DAOs/DAOApplication');
-
-const multerFactory = multer( { storage : multer.memoryStorage() });
-
-// Create pool connection to database
-const pool = mysql.createPool(config.mysqlConfig);
-
-// Create daoUsuario 
-const daoUsuario = new DAOUsuario(pool);
-const daoApplication = new DAOApplication(pool);
 
 // ----------- Middleware Session -----------
 const MYSQLStore = mysqlsession(session);
@@ -56,18 +43,18 @@ app.use('/', index.router);
 app.use('/user', user.router);
 app.use('/application', application.router);
 
-app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
+/*app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
     if (request.file) console.log(request.file);
     daoUsuario.enviarImagen(request.file.buffer, (err) => {
         if (err) console.log(err);
         else response.redirect('/');
     });
-});
-
-/*app.listen(config.port, () => {
-    console.log('Server listening at port: ' + config.port);
 });*/
 
-app.listen(process.env.PORT, () => {
+app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
+
+/*app.listen(process.env.PORT, () => {
+    console.log('Server listening at port: ' + config.port);
+});*/
