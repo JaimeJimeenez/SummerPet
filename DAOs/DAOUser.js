@@ -127,21 +127,6 @@ class DAOUser {
         });
     }
 
-    getSpecialties(id, callback) {
-        this.pool.getConnection((err, connection) => {
-            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
-            else {
-                const sql = 'Select User.Id, User.Name, Direction, Phone, Email, User.Photo, Breed.Name AS BreedName, Size from User JOIN UserDogBreed ON UserDogBreed.IdUser = User.Id JOIN Breed ON Breed.Id = UserDogBreed.IdDogBreed JOIN UserDogSize ON UserDogSize.IdUser = User.Id JOIN DogSize ON UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
-
-                connection.query(sql, [id], (err, specialties) => {
-                    connection.release();
-                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else callback(null, specialties);
-                });
-            }
-        });
-    }
-
     insertUserPhoto(idUser, idPhoto, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
