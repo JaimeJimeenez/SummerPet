@@ -3,10 +3,10 @@
 const mysql = require('mysql');
 const config = require('../config');
 
-const DAOUsuario = require('../DAOs/DAOUsuario');
+const DAOUser = require('../DAOs/DAOUser');
 const {render,screen} = require('@testing-library/jest-dom')
 const pool = mysql.createPool(config.mysqlConfig);
-const daoUsuario = new DAOUsuario(pool);
+const daoUser = new DAOUser(pool);
 
 describe('see carers accommodation for the pet test', () => {
   test('Displays 2 pictures uploaded by Jaime', done => {

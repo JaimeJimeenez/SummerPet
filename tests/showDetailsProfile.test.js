@@ -3,10 +3,10 @@
 const mysql = require('mysql');
 const config = require('../config');
 
-const DAOUsuario = require('../DAOs/DAOUsuario');
+const DAOUser = require('../DAOs/DAOUser');
 
 const pool = mysql.createPool(config.mysqlConfig);
-const daoUsuario = new DAOUsuario(pool);
+const daoUser = new DAOUser(pool);
 
 describe('Show carer profile details', () => {
   test('Displays name, location, and profile pic for Jaime', done => {

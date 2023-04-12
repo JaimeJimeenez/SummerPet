@@ -3,7 +3,7 @@
 const mysql = require('mysql');
 const config = require('../config');
 
-const DAOApplication = require('../DAOs/DAOApplicaton');
+const DAOApplication = require('../DAOs/DAOApplication');
 
 const pool = mysql.createPool(config.mysqlConfig);
 const daoApplication = new DAOApplication(pool);
