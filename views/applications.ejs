@@ -63,45 +63,10 @@
             </div>
         </div>
 
-        <%- include('partials/requestServices') %>
-
-        <div class = "modal fade" id = "showApplication">
-            <div class = "modal-dialog modal-dialog-centered">
-                <div class = "modal-content">
-        
-                    <div class = "modal-header">
-                        <h4> Solicitud pendiente </h4>
-                        <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
-                    </div>
-                
-                    <div class = "modal-body">
-
-                        <div class="row">
-                            <div class = "col col-sm col-md col-xl">
-                                <label for = "start">Fecha inicio:</label>
-                                <input type = "text" class = "form-control" id = "start" name = "start" disabled>
-                            </div>
-                            <div class = "col col-sm col-md col-xl">
-                                <label for = "final">Fecha fin: </label>
-                                <input type = "text" class = 'form-control' id = 'final' name = 'final' disabled>
-                            </div>
-                        </div>
-                                       
-                    </div>
-                        
-                    
-                    <div class = "modal-footer">
-
-                        <div class = "row">
-                            <div class = "col col-sm col-md col-xl">
-                                <button type = 'button' id = 'acceptButton' class = 'btn btn-success' data-id = '' data-bs-dismiss = 'modal'> Aceptar </button>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%- include('partials/modals/requestServices') %>
+        <%- include('partials/modals/showApplication') %>
+        <%- include('partials/modals/establishDisponibility') %>
+       
     </div>
 </body>
 </html>

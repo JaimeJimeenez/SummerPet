@@ -142,6 +142,21 @@ class DAOUser {
             }
         });
     }
+
+    establishDisponibilty(id, startDate, finalDate, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Update User set StartDate = ? and FinalDate = ? where Id = ?;';
+
+                connection.query(sql, [startDate, finalDate, id], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOUser;
