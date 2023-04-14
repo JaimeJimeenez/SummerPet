@@ -24,7 +24,10 @@ router.post('/sendApplication', (request, response) => {
         if (err) console.log(err);
         else daoUser.getUser(request.body.idDogWatcher, (err, user) => {
             if (err) console.log(err);
-            else response.render('profile', { usuario : user });
+            else daoApplication.hasAcceptedApplication(2, request.body.idDogWatcher,(err, accepted) => {
+                if (err) console.log(err);
+                else response.render('profile', { usuario : user, accepted : accepted });
+            });
         });
     });
 });
