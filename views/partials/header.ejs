@@ -1,10 +1,16 @@
 <header>
-    <nav class = 'navbar bg-dark navbar-dark'>
-        <div class = "container-fluid " style="display: flex; justify-content: space-between;" >
+    <nav style="background-color: #364F70" class= 'navbar'>
+        <div class = "container-fluid d-flex justify-content-between"  >
             <a class = 'navbar-brand' href = "/">
-                <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
+                <div class="row">
+                    <div class="col">
+                        <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
+                    </div>    
+                    <div class="col">    
+                        <h1 class =" text-white" > SummerPet</h1>
+                    </div>
+                </div>
             </a>
-            <h1 class ="mt-1 text-white" style="margin-right: auto"> SummerPet</h1>
             <form method = 'GET' action = 'searchKeyWord' class = 'd-flex'>
                 <label for = "keyword"></label>
                 <input class="form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">

@@ -1,0 +1,19 @@
+#bgBlue{
+    background-color: #364F70;
+}
+
+#bgGray{
+    background-color: #586270;
+}
+
+#navLi{
+    background-color: #73A9F0;
+    text-decoration: none;
+}
+
+#navLinks{
+    text-decoration: none;
+    color: #1f1f1f;
+    font-size :18px;
+    font-weight: bold;
+}
