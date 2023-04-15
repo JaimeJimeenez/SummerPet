@@ -34,10 +34,10 @@
 
                     <%- include('partials/navbars/navbarUser') %>
                     
-                    <div class = "mt-3 bg-light p-3" id = 'labelSpecialties'>
+                    <div class = "mt-3 p-3" id = 'labelSpecialties'>
 
                         <% if (!usuario.hasOwnProperty('Photos')) { %>
-                            <div id = 'noPhotos' class = "col col-sm -col-md col-xl p-3 rounded-2 bg-danger">
+                            <div id = 'noPhotos' class = "col col-sm -col-md col-xl p-3 rounded-2 ">
                                 <span class = 'text-white' id = 'messageError' >  <%= usuario.Name %> no dispone de ninguna foto del hospedaje del animal </span>
                             </div>
                         <% } else { %>

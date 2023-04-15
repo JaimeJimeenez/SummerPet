@@ -34,12 +34,16 @@
                     <li class = 'p-3 mt-3 '>
                     <div class = 'row align-items-center'>
                             <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> 
-                                <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="80" height="80">
+                                <% if (!usuario.Photo) { %>
+                                    <img src = "/images/noImageUser.png" alt = "Imagen predefinida"  width="80" height="80" class = 'rounded-circle'>
+                                <% } else { %>
+                                    <img src = "/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="80" height="80" class = 'rounded-circle'>
+                                <% } %>
                             </div>
-                            <div style="font-size: 26px; color:black;" class = "col col-sm-1 col-md-1 col-xl-1 text-center p-2"><b><%= usuario.Name %></b> </div>
-                            <div style="font-size: 26px; color:black;" class = "col col-sm-2 col-md-2 col-xl-2 text-center p-2"><b><%= usuario.Direction %></b> </div>
-                            <div style="font-size: 26px; color:black;" class = "col col-sm-3 col-md-3 col-xl-3 text-center p-2"><b><%= usuario.Email %></b> </div>
-                            <div style="font-size: 26px; color:black;" class = "col col-sm-4 col-md-4 col-xl-4 text-center p-2"><b><%= usuario.Phone %></b> </div>
+                            <div style="font-size: 26px; color:black;" class = "col col-sm-5 col-md-5 col-xl-5 text-center p-2"><b><%= usuario.Name %></b> </div>
+                            <div style="font-size: 26px; color:black;" class = "col col-sm-5 col-md-5 col-xl-5 text-center p-2"><b><%= usuario.Direction %></b> </div>
+                            <!-- <div style="font-size: 26px; color:black;" class = "col col-sm-3 col-md-3 col-xl-3 text-center p-2"><b><%= usuario.Email %></b> </div> -->
+                            <!-- <div style="font-size: 26px; color:black;" class = "col col-sm-4 col-md-4 col-xl-4 text-center p-2"><b><%= usuario.Phone %></b> </div> -->
                     </div>
                 </li>
                 </a>   

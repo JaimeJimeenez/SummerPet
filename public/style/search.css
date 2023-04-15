@@ -12,12 +12,12 @@ li {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 70vh;  
+        /* height: 70vh;   */
 } 
 
 
 #input{
-    width: 600px;
+     /* width: 600px; */
     height: 80px;
     font-size: 22px;
 }
