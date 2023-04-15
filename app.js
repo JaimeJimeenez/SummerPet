@@ -5,7 +5,6 @@ const path = require('path');
 
 // Package's Modules
 const morgan = require('morgan');
-const mysql = require('mysql');
 const express = require('express');
 const session = require('express-session');
 const mysqlsession = require('express-mysql-session');
