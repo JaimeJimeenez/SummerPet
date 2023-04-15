@@ -1,5 +1,5 @@
 <div class="modal fade" id = "modalEstablish" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
     
       <div class="modal-content">
 
@@ -11,22 +11,18 @@
         <form action = "establishDisponiibility" method = 'post'>
             <div class="modal-body">
 
-              <div class = "row align-items-center">
-                <label for = "startDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Fecha de inicio: </label>
-                <input type = 'text' class = "form-control w-50 startDate" name = 'startDate' placeholder = "Fecha de hoy o posterior">
+              <div class = "row align-items-center d-flex justify-content-center">
+                <label for = "startDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Periodo de disponibilidad: </label>
+                <input type = "text" class = 'form-control' style = 'width:27%' name="datefilter" value="" />
               </div>
-              <br>
-              <div class = "row align-items-center">
-                <label for = "endDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Fecha de fin: </label>
-                <input type = "text" class = 'form-control w-50 endDate' name = 'endDate' placeholder = "Fecha posterior a la de inicio">
-              </div>
-
+             
               <div class = "row d-none align-items-center justify-content-center" id = 'errorApplication'>
                 <span class = 'text-danger text-center'> Fechas introducidas incorrectas </span>
               </div>
             </div>
 
             <div class="modal-footer">  
+              <button type = 'button' class = 'btn btn-success material-symbols-outlined' id = 'moreDate'> add </button>
               <button type = 'submit' class = 'btn btn-primary' id = 'applicationButton' disabled> Aceptar </button>
               <button type = "button" class = "btn btn-danger" data-bs-dismiss="modal"> Cancelar </button>
             </div>
