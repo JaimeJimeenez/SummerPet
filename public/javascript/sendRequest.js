@@ -28,7 +28,6 @@ $(function() {
             if (start <= end && actualDate <= start) {
                 $('#applicationButton').attr('disabled', false);
                 $('#errorApplication').addClass('d-none');
-                console.log('Todo ok');
             } else {
                 $('#errorApplication').removeClass('d-none');
                 $('#applicationButton').attr('disabled', true);

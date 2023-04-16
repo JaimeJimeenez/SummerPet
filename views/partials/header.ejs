@@ -1,15 +1,29 @@
 <header>
     <nav class = 'navbar bg-dark navbar-dark'>
-        <div class = "container-fluid " style="display: flex; justify-content: space-between;" >
-            <a class = 'navbar-brand' href = "/">
-                <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
-            </a>
-            <h1 class ="mt-1 text-white" style="margin-right: auto"> SummerPet</h1>
+        <div class = "container-fluid d-flex justify-content-between" >
+            <div class = "d-flex">
+                <a class = 'navbar-brand' href = "/">
+                    <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
+                </a>
+                <h1 class ="mt-1 text-white mr-auto" > SummerPet</h1>
+            </div>
             <form method = 'GET' action = 'searchKeyWord' class = 'd-flex'>
                 <label for = "keyword"></label>
                 <input class="form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
                 <button class="btn btn-primary" type = "submit">Search</button>
+
+                
             </form>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  My profile
+                </button>
+                <div class="dropdown-menu" aria-labelledby="#dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
         </div>
     </nav>
 </header>
