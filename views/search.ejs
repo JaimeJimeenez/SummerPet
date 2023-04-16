@@ -4,44 +4,57 @@
     
     <title> Resultados de búsqueda </title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+    
+    <link rel = "icon" href = "/images/favicon.ico">
+    <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel = "stylesheet">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel = "stylesheet" href = "../style/search.css">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="/images/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href = "../style/search.css">
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<body>
+<body id = "bgLightBlue">
 
     <%- include('partials/header') %>
 
     <div class = "container-fluid mt-3">
 
         <% if (usuarios.length === 0) { %>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class = "alert alert-danger alert-dismissible fade show" role="alert">
                 No existen usuarios encontrados con los campos proporcionados
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type = "button" class = "btn-close" data-bs-dismiss = "alert" aria-label = "Close"></button>
             </div>
         <% } %>
         
-        <ul>
-            <% usuarios.forEach((usuario) => { %>
+        <ul class = 'list-unstyled' id = 'listUsers'>
 
-                <li class = 'd-block justify-content-center align-items-center  bg-light p-4 w-75 mx-auto mb-3 mt-3'>
-                    <div class = 'row align-items-center'>
-                        <div class = "col col-sm-4 col-md-4 col-xl-4 text-center"> Nombre: <%= usuario.Name %> </div>
-                        <div class = "col col-sm-4 col-md-4 col-xl-4 text-center"> Dirección: <%= usuario.Direction %> </div>
-                        <div class = "col offset-1 col-sm col-md col-xl d-flex justify-content-center align-items-center">
-                            <a href = "/user/profile?id=<%=usuario.Id%>" class = 'btn btn-primary' id = 'showProfile'>Ver perfil</a>
+            <% usuarios.forEach((usuario) => { %>
+                <a href = "user/profile?id=<%=usuario.Id%>" class = 'row align-items-center d-block justify-content-center w-75 mx-auto text-decoration-none' id = 'showProfile'>
+
+                    <li class = 'p-3 mt-3 ' id = 'userInfo'>
+                        <div class = 'row align-items-center'>
+
+                            <div class = "col col-sm-2 col-md-2 col-xl-2 text-center"> 
+                                <% if (!usuario.Photo) { %>
+                                    <img src = "/images/noImageUser.png" alt = "Imagen predefinida"  width="80" height="80" class = 'rounded-circle'>
+                                <% } else { %>
+                                    <img src = "user/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="80" height="80" class = 'rounded-circle'>
+                                <% } %>
+                            </div>
+
+                            <div style="font-size: 26px;" class = "col col-sm-5 col-md-5 col-xl-5 text-center p-2 text-black"><b><%= usuario.Name %></b> </div>
+                            <div style="font-size: 26px;" class = "col col-sm-5 col-md-5 col-xl-5 text-center p-2 text-black"><b><%= usuario.Direction %></b> </div>
+
                         </div>
-                    </div>
-                </li>
+                    </li>
+
+                </a> 
             <%}); %>
+
         </ul>
     </div>
+    
 </body>
 </html>

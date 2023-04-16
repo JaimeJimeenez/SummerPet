@@ -1,29 +1,43 @@
 <header>
-    <nav class = 'navbar bg-dark navbar-dark'>
+
+    <nav class = 'navbar' style = "background-color: #364F70">
+
         <div class = "container-fluid d-flex justify-content-between" >
+
             <div class = "d-flex">
                 <a class = 'navbar-brand' href = "/">
                     <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
                 </a>
-                <h1 class ="mt-1 text-white mr-auto" > SummerPet</h1>
+                <a href = "/" class = 'text-decoration-none''><h1 class ="mt-1 text-white mr-auto" > SummerPet</h1></a>
             </div>
+
             <form method = 'GET' action = 'searchKeyWord' class = 'd-flex'>
+
                 <label for = "keyword"></label>
-                <input class="form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
+                <input class = "form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
                 <button class="btn btn-primary" type = "submit">Search</button>
 
-                
             </form>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  My profile
-                </button>
-                <div class="dropdown-menu" aria-labelledby="#dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+
+            <div class = "d-flex me-4 dropdown">
+
+                <button type = "button" class = "btn btn-primary dropdown-toggle" data-bs-toggle = "dropdown"> Establecer </button>
+                <ul class = "dropdown-menu">
+                    <li>
+                        <a class = "dropdown-item" href = "#" data-bs-toggle = 'modal' data-bs-target = '#modalEstablish' id = 'establishDisponibilityBtn'> Disponibilidad </a>
+                    </li>
+                
+                    <li>
+                        <a class = "dropdown-item" href = "#" > Especialidades </a>
+                    </li>
+                    
+                    <li>
+                        <a class = "dropdown-item" href = "#"> Lugar </a>
+                    </li>
+                </ul>
               </div>
+
         </div>
     </nav>
+
 </header>
