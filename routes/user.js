@@ -98,4 +98,27 @@ router.get('/specialties', (request, response) => {
     });
 });
 
+router.post('/establishDisponibility', (request, response) => {
+    response.status(200);
+    
+    console.log(request.body);
+
+    let dates = request.body.date.split('-');
+    let dateStart = dates[0].split('/');
+    let dateEnd = dates[1].split('/');
+    let start = new Date(dateStart[2], dateStart[1] - 1, dateStart[0]);
+    let end = new Date(dateEnd[2], dateEnd[1] - 1, dateEnd[0]);
+    
+    if (!isNaN(Date.parse(start)) && !isNaN(Date.parse(end))) daoUser.insertDisponibility(request.body.id, start, end, (err) => {
+        if (err) {
+            response.status(400);
+            response.end();
+        } else response.json({});
+    });
+    else {
+        response.status(400);
+        response.end();
+    }
+});
+
 module.exports = { router, pool };

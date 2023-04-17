@@ -6,28 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="/images/favicon.ico">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href = "../style/profile.css">
-    <link rel="stylesheet" href = "../style/specialties.css">
+    <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel = "stylesheet">
+    <link rel = "icon" href = "/images/favicon.ico">
+
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel = "stylesheet" type = "text/css" href = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel = "stylesheet" href = "../style/profile.css">
+    <link rel = "stylesheet" href = "../style/navbar.css">
+    <link rel = "stylesheet" href = "../style/specialties.css">
 
     <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src = '/javascript/sendRequest.js'></script>
+    <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src = 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#startDate').datepicker({}); 
-            $('#endDate').datepicker({});
-        });
-    </script>
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    
+    <script src = '/javascript/establishDisponibility.js'></script>
 
 </head>
 <body>
-
     <%- include('partials/header') %>
 
     <div class = "container-fluid">
@@ -45,12 +44,12 @@
                     
                     <div class = "col col-sm col-md col-xl">
                     
-                        <div class = "row d-flex justify-content-center text-center">
-                            Razas de perros
+                        <div class = "bg-white row d-flex justify-content-center text-center rounded-2 p-1">
+                            <h3>Razas de perros</h3>
                             <hr>
                         </div>
                     
-                        <div class = "row">
+                        <div class = "row ">
                             <% if (breeds.length !== 0) { %>
                                 <% breeds.forEach((dogBreed) => { %>  
                                     <div class = "bg-light offset-1 col col-sm col-md col-xl d-flex justify-content-center text-center align-items-center mt-4 rounded-2 labelBreed">
@@ -68,8 +67,8 @@
 
                     <div class = "offset-1 col col-sm col-md col-xl">
                         
-                        <div class = "row d-flex justify-content-center text-center">
-                            Tamaño de perro
+                        <div class = "bg-white row d-flex justify-content-center text-center rounded-2 p-2">
+                            <h3>Tamaño de perro</h3>
                             <hr>
                         </div>
                         
@@ -106,18 +105,14 @@
                                     <span class = text-white id="sin-pref-tamanio"> <%= usuario.Name %> no tiene preferencia en el tamaño de los perros </span>
                                 </div>
                             <% } %>
-
                         </div>
-                        
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
-        <%- include('partials/requestServices') %>
+        <%- include('partials/modals/requestServices') %>
+        <%- include('partials/modals/establishDisponibility') %>
     </div>
 </body>
 </html>

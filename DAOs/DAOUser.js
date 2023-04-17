@@ -156,6 +156,21 @@ class DAOUser {
             }
         });
     }
+
+    insertDisponibility(id, startDate, endDate, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert Disponibility (IdDogWatcher, StartDate, EndDate) values(?, ?, ?);';
+
+                connection.query(sql, [id, startDate, endDate], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
 }
 
 module.exports = DAOUser;
