@@ -5,17 +5,16 @@
         <img src = "/user/profilePhoto/<%=usuario.Id%>" alt = "Foto de perfil del usuario" width="250" height="250" class = 'rounded-circle'>
     <% } %>
     <div class = 'row mt-2'>
-
-        <div class = "col col-sm col-md col-xl h3">
+        <div class = "col col-sm-6 col-md-6 col-xl-6 h3">
 
             <div id = 'profileName' class = "row"> <%= usuario.Name %> </div>
             <div id = 'profileDirection' class = "row h5"> <%= usuario.Direction %> </div>
 
             <% if (accepted) { %>
-                <div class = 'row h6' id = 'profileEmail'> Email: <%= usuario.Email %></div>
-                <div class = 'row h6' id = 'profilePhone'> Teléfono: <%= usuario.Phone %></div>
+                <div class = 'row h6' id = 'profileEmail'> <%= usuario.Email %></div>
+                <div class = 'row h6' id = 'profilePhone'> <%= usuario.Phone %></div>
             <% } %>
-
+        
         </div>
     </div>
 </div>

@@ -1,11 +1,10 @@
-.button2 {
+.navButton{
     display: inline-block;
     transition: all 0.2s ease-in;
     position: relative;
     overflow: hidden;
     z-index: 1;
     color: #090909;
-    padding: 0.7em 1.7em;
     font-size: 18px;
     border-radius: 0.5em;
     background: #e8e8e8;

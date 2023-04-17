@@ -42,14 +42,6 @@ app.use('/', index.router);
 app.use('/user', user.router);
 app.use('/application', application.router);
 
-/*app.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
-    if (request.file) console.log(request.file);
-    daoUsuario.enviarImagen(request.file.buffer, (err) => {
-        if (err) console.log(err);
-        else response.redirect('/');
-    });
-});*/
-
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
 });
