@@ -4,6 +4,21 @@ class DAOUser {
 
     constructor(pool) { this.pool = pool; }
 
+    signIn(name, email, password, direction, description, image, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert into User (Name, Email, Password, Direction, Description, Photo, Phone, isDogWatcher, Active) values (?, ?, ?, ?, ?, ?, ?, ?, 1);';
+
+                connection.query(sql, [name, email, password, direction, description, image], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
+
     getUser(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));

@@ -2,6 +2,7 @@
 
 // File's modules
 const config = require('../config');
+const { validateSignUp, validationMiddleware } = require('../validators/signUp');
 const DAOUser = require('../DAOs/DAOUser');
 const DAOApplication = require('../DAOs/DAOApplication');
 
@@ -10,6 +11,7 @@ const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer');
 const moment = require('moment');
+const { validationResult } = require('express-validator');
 
 const multerFactory = multer({storage : multer.memoryStorage() });
 const router = express.Router();
@@ -20,13 +22,18 @@ const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
 
 // --------------------------
-router.get('/signIn', (request, response) => {
+router.get('/signUp', (request, response) => {
     response.status(200);
-    response.render('signIn');
+    response.render('signUp', { errors : [] });
 });
 
-router.post('/signIn', multerFactory.single('image'), (request, response) => {
-    
+router.post('/signUp', multerFactory.single('image'), validateSignUp, validationMiddleware, (request, response) => {
+    response.status(200);
+
+    daoUser.signIn(request.body.username, request.body.email, request.body.password, request.body.direction, request.body.description, request.file.buffer, (err) => {
+        if (err) console.log(err);
+        else response.redirect('/');
+    });
 });
 
 router.get('/profile', (request, response) => {
