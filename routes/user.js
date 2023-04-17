@@ -20,6 +20,15 @@ const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
 
 // --------------------------
+router.get('/signIn', (request, response) => {
+    response.status(200);
+    response.render('signIn');
+});
+
+router.post('/signIn', multerFactory.single('image'), (request, response) => {
+    
+});
+
 router.get('/profile', (request, response) => {
     let id = Number(request.query.id);
     
