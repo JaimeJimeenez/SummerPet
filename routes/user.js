@@ -21,19 +21,43 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
 
+// ----------- Middlewares -----------
+const alreadyLogIn = (request, response, next) => {
+    if (request.session.user) response.redirect('/');
+    else next();
+};
+
+const yetLogIn = (request, response, next) => {
+    if (!request.session.user) response.redirect('/user/login');
+    else next();
+};
+
 // --------------------------
 router.get('/signUp', (request, response) => {
     response.status(200);
-    response.render('signUp', { errors : [] });
+    response.render('signUp', { errors : [], exists : false });
 });
 
 router.post('/signUp', multerFactory.single('image'), validateSignUp, validationMiddleware, (request, response) => {
     response.status(200);
 
-    daoUser.signIn(request.body.username, request.body.email, request.body.password, request.body.direction, request.body.description, request.file.buffer, (err) => {
+    daoUser.userExists(request.body.email, (err, exists) => {
         if (err) console.log(err);
-        else response.redirect('/');
+        else {
+            if (exists) response.render('signUp', { errors : [], exists : true });
+            let photo = request.file === undefined ? null : request.file.buffer;
+            let isDogWatcher = request.body.isDogWatcher === 'yes' ? 1 : 0;
+            let description = request.body.description === '' ? null : request.body.description;
+            let phone = request.body.phone === '' ? null : request.body.phone; 
+            console.log(request.body);
+
+            daoUser.signIn(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err) => {
+                if (err) console.log(err);
+                else response.redirect('/');
+            });
+        }
     });
+    
 });
 
 router.get('/profile', (request, response) => {

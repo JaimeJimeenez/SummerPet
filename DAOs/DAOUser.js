@@ -4,13 +4,13 @@ class DAOUser {
 
     constructor(pool) { this.pool = pool; }
 
-    signIn(name, email, password, direction, description, image, callback) {
+    signIn(name, email, password, direction, phone, description, image, isDogWatcher, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Insert into User (Name, Email, Password, Direction, Description, Photo, Phone, isDogWatcher, Active) values (?, ?, ?, ?, ?, ?, ?, ?, 1);';
+                const sql = 'Insert into User (Name, Email, Photo, Password, Direction, Description, Phone, isDogWatcher, Active) values (?, ?, ?, ?, ?, ?, ?, ?, 1);';
 
-                connection.query(sql, [name, email, password, direction, description, image], (err) => {
+                connection.query(sql, [name, email, image, password, direction, description, phone, isDogWatcher], (err) => {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null);
@@ -29,6 +29,21 @@ class DAOUser {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, user[0]);
+                });
+            }
+        });
+    }
+
+    userExists(email, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from User where Email = ?;';
+
+                connection.query(sql, [email], (err, user) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null, user.length === 1);
                 });
             }
         });
