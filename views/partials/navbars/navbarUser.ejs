@@ -1,18 +1,19 @@
-<nav class = 'rounded-2 bg-light p-3 d-flex' id = 'navUser'>
-    <ul class = 'nav me-auto'>
-        <li class = 'nav-item'>
-            <a href = "/user/profile?id=<%=usuario.Id%>" class = 'ms-1 nav-link'> 
+<nav class = 'rounded-2  p-3' id = 'navUser'>
+    <ul class = 'nav' >
+        <li class = 'nav-item me-2' id="">
+            <a href = "/profile?id=<%=usuario.Id%>" class = 'ms-1 button2' id = 'navLinks'> 
                 Descripción 
             </a>
         </li>
-        <li class = 'nav-item'>
-            <a href = "/user/specialties?id=<%=usuario.Id%>" class = 'nav-link' id = 'specialtiesButton'> Especialidades </a>
+        <li class = 'nav-item me-2' id="">
+            <a href = "/specialty?id=<%=usuario.Id%>" class = 'ms-1 nav-link button2' id = 'navLinks'> 
+                Especialidades
+            </a>
         </li>
-        <li class = 'nav-item'>
-            <a href = "/user/picturesLocation?id=<%=usuario.Id%>" class = 'nav-link' id = 'picturesBtn'> Lugar</a>
-        </li>
-        <li class = 'nav-item'>
-            <a href = "/application/applications?id=<%=usuario.Id%>" id = 'myApplicsButton' class = 'nav-link'> Mis solicitudes </a>
+        <li class = 'nav-item me-2' id=""> 
+            <a href = "/picturesLocation?id=<%=usuario.Id%>" class = 'ms-1 nav-link button2' id = 'navLinks'> 
+                Lugar
+            </a>
         </li>
     </ul>
     
