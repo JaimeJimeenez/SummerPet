@@ -1,3 +1,7 @@
+body {
+    background-color: #BDD4F2;
+}
+
 #profileUser {
     margin-left: 10%;
     margin-right: 10%;
@@ -11,5 +15,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-  
+}
+
+#labelDescription {
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    border-radius: 5px;
+    background-color: #586270;
+}
