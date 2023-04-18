@@ -9,7 +9,10 @@ module.exports = {
         password: 'SummerPet2023',
         database: 'summerpet',
         port: 3306,
-        ssl: {ca: fs.readFileSync("./DigiCertGlobalRootCA.crt.pem")}
+        ssl: {
+            rejectUnauthorized: true,
+            ca: fs.readFileSync("./DigiCertGlobalRootCA.crt.pem", 'utf-8')
+        }
     },
     
     port: 3000

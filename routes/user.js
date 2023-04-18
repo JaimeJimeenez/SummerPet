@@ -11,7 +11,6 @@ const express = require('express');
 const mysql = require('mysql');
 const multer = require('multer');
 const moment = require('moment');
-const { validationResult } = require('express-validator');
 
 const multerFactory = multer({storage : multer.memoryStorage() });
 const router = express.Router();
@@ -21,7 +20,6 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
 
-/*
 // ----------- Middlewares -----------
 const alreadyLogIn = (request, response, next) => {
     if (request.session.user) response.redirect('/');
@@ -32,9 +30,14 @@ const yetLogIn = (request, response, next) => {
     if (!request.session.user) response.redirect('/user/login');
     else next();
 };
-*/
 
 // --------------------------
+router.use((request, response, next) => {
+    response.locals.user = request.session.user;
+    console.log(response.locals.user)
+    next();
+});
+
 router.get('/signUp', (request, response) => {
     response.status(200);
     response.render('signUp', { errors : [], exists : false });
@@ -54,7 +57,11 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
 
             daoUser.signUp(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err) => {
                 if (err) console.log(err);
-                else response.redirect('/');
+                else {
+                    console.log(user);
+                    request.session.user = user;
+                    response.redirect('/');
+                }
             });
         }
     });
@@ -73,9 +80,9 @@ router.post('/signIn', (request, response) => {
         if (err) console.log(err);
         else if (!user) response.render('signIn', { signError : true });
         else {
-            request.session.user = user;
             console.log(user);
-            response.render('/');
+            request.session.user = user;
+            response.redirect('/');
         }
     });
 });
