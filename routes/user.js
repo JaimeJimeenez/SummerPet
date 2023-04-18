@@ -98,4 +98,26 @@ router.get('/specialties', (request, response) => {
     });
 });
 
+router.get('/uploadLocation', (request, response) => {
+    let id = Number(request.query.id);
+
+    if (isNaN(id)) {
+        request.response(400);
+        response.end('Incorrect petition');
+    } else daoUser.getUser(id, (err, user) => {
+        if (err) console.log(err);
+        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
+            if (err) console.log(err);
+            else daoUser.getDogSizes(id, (err, dogSizes) => {
+                if (err) console.log(err);
+                else daoUser.getDogBreeds(id, (err, breeds) => {
+                    if (err) console.log(err);
+                    else response.render('specialties', { usuario : user, breeds : breeds, dogSizes : dogSizes, accepted : accepted });
+                });
+            });
+        });
+    });
+});
+
+
 module.exports = { router, pool };
