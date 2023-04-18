@@ -1,3 +1,6 @@
+<link rel = "stylesheet" href = "../style/calendar.css">
+<link rel="stylesheet" href= "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
 <div class = "col col-sm-4 col-md-4 col-xl-4">
     <% if (!usuario.Photo) { %>
         <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="250" height="250">
@@ -14,7 +17,46 @@
                 <div class = 'row h6' id = 'profileEmail'> <%= usuario.Email %></div>
                 <div class = 'row h6' id = 'profilePhone'> <%= usuario.Phone %></div>
             <% } %>
-        
+            <div class="calendar-container">
+                <header class="calendar-header">
+                    <p class="calendar-current-date"></p>
+                    <div class="calendar-navigation">
+                        <span id="calendar-prev" 
+                            class="material-symbols-rounded">
+                            chevron_left
+                        </span>
+                        <div class="month-year">
+                            <% let d = new Date(); %>
+                            <% let day = d.getDate(); %>
+                            <% let m = ["January", "February", "March", "April", "May", "June", "July", 
+                            "August", "September", "October", "November", "December"]; %>
+                            <% let month = m[d.getMonth()]; %>
+                            <% let year = d.getFullYear(); %>
+                            <% let newdate =  month + ", " + year; %>
+                            <%= newdate %>
+                        </div>
+                        <span id="calendar-next" 
+                            class="material-symbols-rounded">
+                            chevron_right
+                        </span>
+                    </div>
+                </header>
+                  
+                <div class="calendar-body">
+                    <ul class="calendar-weekdays">
+                        <li>Sun</li>
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                    </ul>
+                    
+                    
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
