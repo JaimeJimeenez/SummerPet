@@ -1,0 +1,24 @@
+<div class="modal fade" id = "modalRequestPhotos" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"> dsafsdf </h4>
+        <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
+      </div>
+      <% if (typeof error !== 'undefined') { %>
+        <h1>HOLA</h1>
+        <% } %>
+        <% else { %>
+          <h1>ADIOS</h1>
+      <% } %>
+      <form action = "enviarImagen" method = 'post' enctype = "multipart/form-data">
+          <label for = "foto"></label>
+          <input type = "file" name = 'foto'>
+          <button type = "submit"> Enviar</button>
+      </form>
+    
+    </div>
+    
+</div>
+</div>

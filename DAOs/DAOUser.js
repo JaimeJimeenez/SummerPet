@@ -66,6 +66,21 @@ class DAOUser {
         });
     }
 
+    // havePhotosLocation(id, callback) {
+    //     this.pool.getConnection((err, connection) => {
+    //         if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+    //         else {
+    //             const sql = 'Select count(*) from UserPhotos where idUser = ?;';
+
+    //             connection.query(sql, [id], (err, numPhotos) => {
+    //                 connection.release();
+    //                 if (err) new Error('Error de acceso a la base de dato: ' + err.message);
+    //                 else if (numPhotos[0]['count(*)'] === 0) callback(null, false);
+    //                 else callback(null, true);
+    //             });
+    //         }
+    //     });
+    // }
     havePhotosLocation(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
@@ -138,6 +153,16 @@ class DAOUser {
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null);
                 });
+            }
+        });
+    }
+
+    getUserPhoto(idUser,callback){
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select Photo1 from photoslocation Where id = ?';
+
             }
         });
     }

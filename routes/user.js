@@ -106,15 +106,13 @@ router.get('/uploadLocation', (request, response) => {
         response.end('Incorrect petition');
     } else daoUser.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
+        else daoApplication.havePhotosLocation(id, (err, photos) => {
             if (err) console.log(err);
-            else daoUser.getDogSizes(id, (err, dogSizes) => {
-                if (err) console.log(err);
-                else daoUser.getDogBreeds(id, (err, breeds) => {
-                    if (err) console.log(err);
-                    else response.render('specialties', { usuario : user, breeds : breeds, dogSizes : dogSizes, accepted : accepted });
-                });
-            });
+            else if(photos=== 0) {
+                console.log('No hay fotos');
+            } else {
+                console.log('Hay fotos');
+            }
         });
     });
 });
