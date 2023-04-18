@@ -21,6 +21,7 @@ const pool = mysql.createPool(config.mysqlConfig);
 const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
 
+/*
 // ----------- Middlewares -----------
 const alreadyLogIn = (request, response, next) => {
     if (request.session.user) response.redirect('/');
@@ -31,6 +32,7 @@ const yetLogIn = (request, response, next) => {
     if (!request.session.user) response.redirect('/user/login');
     else next();
 };
+*/
 
 // --------------------------
 router.get('/signUp', (request, response) => {
@@ -49,15 +51,33 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
             let isDogWatcher = request.body.isDogWatcher === 'yes' ? 1 : 0;
             let description = request.body.description === '' ? null : request.body.description;
             let phone = request.body.phone === '' ? null : request.body.phone; 
-            console.log(request.body);
 
-            daoUser.signIn(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err) => {
+            daoUser.signUp(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err) => {
                 if (err) console.log(err);
                 else response.redirect('/');
             });
         }
     });
-    
+});
+
+router.get('/signIn', (request, response) => {
+    response.status(200);
+    response.render('signIn', { signError : false });
+});
+
+router.post('/signIn', (request, response) => {
+    response.status(200);
+
+    daoUser.signIn(request.body.email, request.body.password, (err, user) => {
+        console.log(user);
+        if (err) console.log(err);
+        else if (!user) response.render('signIn', { signError : true });
+        else {
+            request.session.user = user;
+            console.log(user);
+            response.render('/');
+        }
+    });
 });
 
 router.get('/profile', (request, response) => {

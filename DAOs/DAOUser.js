@@ -4,7 +4,7 @@ class DAOUser {
 
     constructor(pool) { this.pool = pool; }
 
-    signIn(name, email, password, direction, phone, description, image, isDogWatcher, callback) {
+    signUp(name, email, password, direction, phone, description, image, isDogWatcher, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
@@ -14,6 +14,21 @@ class DAOUser {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null);
+                });
+            }
+        });
+    }
+
+    signIn(email, password, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from User where Email = ? and Password = ?;';
+
+                connection.query(sql, [email, password], (err, user) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null, user[0]);
                 });
             }
         });
