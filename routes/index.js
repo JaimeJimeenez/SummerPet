@@ -15,6 +15,11 @@ const router = express.Router();
 const daoUser = new DAOUser(pool);
 
 // ---------------------
+router.use((request, response, next) => {
+    response.locals.user = request.session.user;
+    next();
+});
+
 router.get('/', (request, response, next) => {
     response.render('index');
 });

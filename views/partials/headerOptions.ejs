@@ -1,0 +1,40 @@
+<div class = "d-flex">
+    <% if (locals.user === undefined) { %>
+        <button type = 'button' class = 'btn btn-primary me-2'>
+            <a href = "/user/signIn" class = 'text-decoration-none text-white'> Iniciar sesión </a>
+        </button>
+        <button type = 'button' class = 'btn btn-primary me-2'>
+            <a href = "/user/signUp" class = 'text-decoration-none text-white'> Nueva Cuenta </a>
+        </button>
+    <% } else { %>
+        <div class = "d-flex me-2 dropdown dropstart">
+            <button type = "button" class = "btn btn-primary dropdown-toggle" data-bs-toggle = "dropdown">
+                <% if (!user.Photo) { %>
+                    <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="25" height="25">
+                <% } else { %>
+                    <img src = "/user/profilePhoto/<%=locals.user.Id%>" alt = "Foto de perfil del usuario" width="25" height="25" class = 'rounded-circle'>
+                <% } %>
+            </button>
+            <ul class = "dropdown-menu">
+                <% if (user.isDogWatcher) {%>
+                    <li>
+                        <a class = "dropdown-item" href = "#" data-bs-toggle = 'modal' data-bs-target = '#modalEstablish' id = 'establishDisponibilityBtn'> Disponibilidad </a>
+                    </li>
+
+                    <li>
+                        <a class = "dropdown-item" href = "#" > Especialidades </a>
+                    </li>
+    
+                    <li>
+                        <a class = "dropdown-item" href = "#"> Lugar </a>
+                        <hr class = 'dropdown-divider'>
+                    </li>
+                <% } %>
+                
+                <li>
+                    <a class = 'dropdown-item' href = "/user/logout"> Cerrar sesión </a>
+                </li>
+            </ul>
+        </div>
+    <% } %>
+</div>

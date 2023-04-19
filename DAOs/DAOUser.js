@@ -10,10 +10,10 @@ class DAOUser {
             else {
                 const sql = 'Insert into User (Name, Email, Photo, Password, Direction, Description, Phone, isDogWatcher, Active) values (?, ?, ?, ?, ?, ?, ?, ?, 1);';
 
-                connection.query(sql, [name, email, image, password, direction, description, phone, isDogWatcher], (err) => {
+                connection.query(sql, [name, email, image, password, direction, description, phone, isDogWatcher], (err, newUser) => {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
-                    else callback(null);
+                    else callback(null, newUser.insertId);
                 });
             }
         });

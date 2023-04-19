@@ -34,7 +34,6 @@ const yetLogIn = (request, response, next) => {
 // --------------------------
 router.use((request, response, next) => {
     response.locals.user = request.session.user;
-    console.log(response.locals.user)
     next();
 });
 
@@ -55,10 +54,21 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
             let description = request.body.description === '' ? null : request.body.description;
             let phone = request.body.phone === '' ? null : request.body.phone; 
 
-            daoUser.signUp(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err) => {
+            daoUser.signUp(request.body.username, request.body.email, request.body.password, request.body.direction, phone, description, photo, isDogWatcher, (err, id) => {
                 if (err) console.log(err);
                 else {
-                    console.log(user);
+                    let user = {
+                        Id : id,
+                        Name : request.body.username,
+                        Email : request.body.email,
+                        Password : request.body.password,
+                        Direction : request.body.direction,
+                        Phone : phone,
+                        Photo : photo,
+                        Description : description,
+                        isDogWatcher : isDogWatcher
+                    }     
+                    
                     request.session.user = user;
                     response.redirect('/');
                 }
@@ -76,15 +86,18 @@ router.post('/signIn', (request, response) => {
     response.status(200);
 
     daoUser.signIn(request.body.email, request.body.password, (err, user) => {
-        console.log(user);
         if (err) console.log(err);
         else if (!user) response.render('signIn', { signError : true });
         else {
-            console.log(user);
             request.session.user = user;
             response.redirect('/');
         }
     });
+});
+
+router.get('/logout', yetLogIn, (request, response) => {
+    request.session.destroy();
+    response.redirect('/');
 });
 
 router.get('/profile', (request, response) => {

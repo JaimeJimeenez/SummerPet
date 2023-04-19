@@ -7,9 +7,18 @@
     <meta charset="UTF-8">
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     
+    <link rel = "stylesheet" type = "text/css" href = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel = "icon" href = "/images/favicon.ico">
     <link rel = "stylesheet" href = "../style/index.css">
+
+    <script src = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script src = '/javascript/establishDisponibility.js'></script>
 
 </head>
 <body class = 'bgLightBlue'>
@@ -25,39 +34,7 @@
                     </a>
                 </div>
 
-                <div class = "d-flex">
-                    <% if (locals.user === undefined) { %>
-                        <button type = 'button' class = 'btn btn-primary me-2'>
-                            <a href = "/user/signIn" class = 'text-decoration-none text-white'> Iniciar sesión </a>
-                        </button>
-                        <button type = 'button' class = 'btn btn-primary me-2'>
-                            <a href = "/user/signUp" class = 'text-decoration-none text-white'> Nueva Cuenta </a>
-                        </button>
-                    <% } else { %>
-                        <div class = "d-flex me-4 dropdown">
-                            <button type = "button" class = "btn btn-primary dropdown-toggle" data-bs-toggle = "dropdown">
-                                <% if (!user.Photo) { %>
-                                    <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="50" height="50">
-                                <% } else { %>
-                                    <img src = "/user/profilePhoto/<%=locals.user.Id%>" alt = "Foto de perfil del usuario" width="50" height="50" class = 'rounded-circle'>
-                                <% } %>
-                            </button>
-                            <ul class = "dropdown-menu">
-                                <li>
-                                    <a class = "dropdown-item" href = "#" data-bs-toggle = 'modal' data-bs-target = '#modalEstablish' id = 'establishDisponibilityBtn'> Disponibilidad </a>
-                                </li>
-                
-                                <li>
-                                    <a class = "dropdown-item" href = "#" > Especialidades </a>
-                                </li>
-                    
-                                <li>
-                                    <a class = "dropdown-item" href = "#"> Lugar </a>
-                                </li>
-                            </ul>
-                        </div>
-                    <% } %>
-                </div>
+                <%- include('partials/headerOptions') %>
             </nav>
         </div>
 
@@ -85,6 +62,10 @@
 
         </div>
 
+        <% if (locals.user) { %>
+            <%- include('partials/modals/establishDisponibility') %>
+        <% } %>
+        
     </div>
 </body>
 </html>

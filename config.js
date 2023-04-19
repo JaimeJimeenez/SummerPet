@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = {
 
-    mysqlConfig :{
+    /*mysqlConfig :{
         host: 'summerpet.mysql.database.azure.com',
         user: 'SMPT',
         password: 'SummerPet2023',
@@ -13,6 +13,14 @@ module.exports = {
             rejectUnauthorized: true,
             ca: fs.readFileSync("./DigiCertGlobalRootCA.crt.pem", 'utf-8')
         }
+    },*/
+
+
+    mysqlConfig : {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'SummerPet'
     },
     
     port: 3000
