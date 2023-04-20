@@ -20,12 +20,9 @@
             <div class="calendar-container">
                 <header class="calendar-header">
                     <p class="calendar-current-date"></p>
-                    <div class="calendar-navigation">
-                        <span id="calendar-prev" 
-                            class="material-symbols-rounded">
-                            chevron_left
-                        </span>
-                        <div class="month-year">
+                    <div class="calendar-navigation d-flex">
+
+                        <div class="month-year d-flex align-items-center" >
                             <% let d = new Date(); %>
                             <% let day = d.getDate(); %>
                             <% let m = ["January", "February", "March", "April", "May", "June", "July", 
@@ -34,11 +31,17 @@
                             <% let year = d.getFullYear(); %>
                             <% let newdate =  month + ", " + year; %>
                             <%= newdate %>
+                        <button id="calendar-prev" a class="material-symbols-rounded" type="button" onclick='funcionalidadPrev("<%= day%>", "<%=d.getMonth()%>","<%=year%>","<%=newdate%>")'>
+                            chevron_left
+                        </button>
+                        
+                            
+                            
+                            
                         </div>
-                        <span id="calendar-next" 
-                            class="material-symbols-rounded">
+                        <button id="calendar-next" a class="material-symbols-rounded" type="button" onclick='funcionalidadNext("<%= day%>", "<%=d.getMonth()%>","<%=year%>")' >
                             chevron_right
-                        </span>
+                        </button>
                     </div>
                 </header>
                   
@@ -52,8 +55,71 @@
                         <li>Fri</li>
                         <li>Sat</li>
                     </ul>
-                    
-                    
+                    <ul class="calendar-days">
+                        <% let daysInMonth = new Date(year, d.getMonth()+1, 0).getDate(); %>
+                        <% let firstDay = new Date(year, d.getMonth(), 1).getDay(); %>
+                        <% for (let i = 1; i <= daysInMonth; i++) { %>
+                          <% if (i === 1) { %>
+                            <% for (let j = 0; j < firstDay; j++) { %>
+                              <li></li>
+                            <% } %>
+                          <% } %>
+                          <li><%= i %></li>
+                        <% } %>
+                      </ul>
+                    <!-- Add the following code to your JavaScript file -->
+<script id="next-prev">
+    function funcionalidadPrev(d,month,year,newdate) {
+        console.log(newdate);
+    if (month === 0) {
+        month = 11;
+        year -= 1;
+    } else {
+        month -= 1;
+    }
+    newdate = getFormattedDate(month, year);
+    console.log(newdate);
+    $(".month-year").text(newdate);
+    updateCalendar(month, year);
+    }
+
+function funcionalidadNext(d,month,year,newdate) {
+ 
+  if (month === 11) {
+    month = 0;
+    year += 1;
+  } else {
+    month += 1;
+  }
+  
+   newdate = getFormattedDate(month, year);
+  $(".month-year").text(newdate);
+  updateCalendar(month, year);
+}
+
+function getFormattedDate(month, year) {
+  let m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  let newdate = m[month] + ", " + year;
+  return newdate;
+}
+
+function updateCalendar(month, year) {
+  let daysInMonth = new Date(year, month + 1, 0).getDate();
+  let firstDay = new Date(year, month, 1).getDay();
+  let $calendarDays = $(".calendar-days");
+  $calendarDays.empty();
+  
+  for (let i = 1; i <= daysInMonth; i++) {
+    if (i === 1) {
+      for (let j = 0; j < firstDay; j++) {
+        $calendarDays.append("<li></li>");
+      }
+    }
+    $calendarDays.append("<li>" + i + "</li>");
+  }
+}
+    
+  </script>
                     
                 </div>
             </div>
