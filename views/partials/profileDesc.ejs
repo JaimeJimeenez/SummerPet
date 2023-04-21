@@ -14,7 +14,11 @@
                 <div class = 'row h6' id = 'profileEmail'> <%= usuario.Email %></div>
                 <div class = 'row h6' id = 'profilePhone'> <%= usuario.Phone %></div>
             <% } %>
-        
+              <div class="row h5">
+                <button type="button" class="btn btn-primary" id="btn-calendar" data-id = '<%=usuario.Id%>'> Calendario de Disponibilidad</button> 
+                <div id="calendar"> 
+                </div>
+              </div>
         </div>
     </div>
 </div>
