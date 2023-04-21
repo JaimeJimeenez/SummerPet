@@ -27,7 +27,7 @@ const alreadyLogIn = (request, response, next) => {
 };
 
 const yetLogIn = (request, response, next) => {
-    if (!request.session.user) response.redirect('/user/login');
+    if (!request.session.user) response.redirect('/user/signIn');
     else next();
 };
 
@@ -37,7 +37,7 @@ router.use((request, response, next) => {
     next();
 });
 
-router.get('/signUp', (request, response) => {
+router.get('/signUp', alreadyLogIn, (request, response) => {
     response.status(200);
     response.render('signUp', { errors : [], exists : false });
 });
@@ -77,7 +77,7 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
     });
 });
 
-router.get('/signIn', (request, response) => {
+router.get('/signIn', alreadyLogIn, (request, response) => {
     response.status(200);
     response.render('signIn', { signError : false });
 });
@@ -100,7 +100,7 @@ router.get('/logout', yetLogIn, (request, response) => {
     response.redirect('/');
 });
 
-router.get('/profile', (request, response) => {
+router.get('/profile', yetLogIn, (request, response) => {
     let id = Number(request.query.id);
     
     if (isNaN(id)) {
@@ -115,7 +115,7 @@ router.get('/profile', (request, response) => {
     });
 });
 
-router.get('/profilePhoto/:id', (request, response) => {
+router.get('/profilePhoto/:id', yetLogIn, (request, response) => {
     let id = Number(request.params.id);
 
     if (isNaN(id)) {
@@ -127,7 +127,7 @@ router.get('/profilePhoto/:id', (request, response) => {
     });
 });
 
-router.get('/picturesLocation', (request, response) => {
+router.get('/picturesLocation', yetLogIn, (request, response) => {
     let id = Number(request.query.id);
 
     if (isNaN(id)) {
@@ -145,7 +145,7 @@ router.get('/picturesLocation', (request, response) => {
     });
 });
 
-router.get('/photosLocation/:id', (request, response) => {
+router.get('/photosLocation/:id', yetLogIn, (request, response) => {
     let id = Number(request.params.id);
 
     if (isNaN(id)) {
@@ -157,7 +157,7 @@ router.get('/photosLocation/:id', (request, response) => {
     });
 });
 
-router.get('/specialties', (request, response) => {
+router.get('/specialties', yetLogIn, (request, response) => {
     let id = Number(request.query.id);
 
     if (isNaN(id)) {
@@ -178,7 +178,7 @@ router.get('/specialties', (request, response) => {
     });
 });
 
-router.post('/establishDisponibility', (request, response) => {
+router.post('/establishDisponibility', yetLogIn, (request, response) => {
     response.status(200);
     
     console.log(request.body);
