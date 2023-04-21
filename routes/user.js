@@ -111,6 +111,7 @@ router.get('/profile', yetLogIn, (request, response) => {
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
             else response.render('profile', { usuario : user, accepted : accepted });
+           
         });
     });
 });
@@ -177,8 +178,19 @@ router.get('/specialties', yetLogIn, (request, response) => {
         });
     });
 });
-
-router.post('/establishDisponibility', yetLogIn, (request, response) => {
+router.get('/getDisponibility/:id', (request, response) => {
+    let id = Number(request.params.id);
+    
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    }
+    else daoUser.getDisponibility(id,(err, disponibilities)=>{
+        if(err) console.log(err);
+        else response.json({ disponibilities : disponibilities });
+    })
+});
+router.post('/establishDisponibility', (request, response) => {
     response.status(200);
     
     console.log(request.body);
