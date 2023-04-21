@@ -35,7 +35,7 @@ $(function() {
             
             array.push(fechaF);
             
-            ranges["semana"+i]=array;
+            ranges[moment(fecha).format('DD/MM/YYYY') + ' - ' + moment(fechaF).format('DD/MM/YYYY')]=array;
             i++;
           }); 
           
