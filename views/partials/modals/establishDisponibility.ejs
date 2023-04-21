@@ -1,5 +1,5 @@
 <div class="modal fade" id = "modalEstablish" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class = "modal-dialog modal-dialog-centered modal-lg">
     
       <div class="modal-content">
 
@@ -8,25 +8,27 @@
           <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
         </div>
 
-        <form action = "establishDisponiibility" method = 'post'>
             <div class="modal-body">
 
+              <div class = "row d-none">
+                <label for = "idDogWatcher"></label>
+                <input type = "text" name = 'idDogWatcher' id = 'idDogWatcher' value = '<%= usuario.Id %>'>
+              </div>
+              
               <div class = "row align-items-center d-flex justify-content-center">
-                <label for = "startDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Periodo de disponibilidad: </label>
-                <input type = "text" class = 'form-control' style = 'width:27%' name="datefilter" value="" />
+                <label for = "rangeDates" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Periodo de disponibilidad: </label>
+                <input type = "text" id = 'datefilter' class = 'form-control' style = 'width:27%' name = "datefilter" value="" />
               </div>
              
               <div class = "row d-none align-items-center justify-content-center" id = 'errorApplication'>
-                <span class = 'text-danger text-center'> Fechas introducidas incorrectas </span>
+                <span class = 'text-success text-center' id = 'acceptDates'></span>
               </div>
             </div>
 
             <div class="modal-footer">  
-              <button type = 'button' class = 'btn btn-success material-symbols-outlined' id = 'moreDate'> add </button>
-              <button type = 'submit' class = 'btn btn-primary' id = 'applicationButton' disabled> Aceptar </button>
-              <button type = "button" class = "btn btn-danger" data-bs-dismiss="modal"> Cancelar </button>
+              <button type = 'button' class = 'btn btn-primary' id = 'establishButton' disabled> Aceptar </button>
+              <button type = "button" class = "btn btn-danger"  id = 'cancelButton' data-bs-dismiss = "modal"> Cancelar </button>
             </div>
-        </form>
       </div>
       
   </div>

@@ -1,0 +1,37 @@
+.bgLightBlue {
+    background-color: #BDD4F2;
+}
+
+#bgBlue {
+    background-color: #364F70;
+}
+
+#searchBtn {
+    font-size: 22px;
+    height: 80px;
+    padding-left: 33px;
+    padding-right: 33px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    border-radius: 9px;
+    background: #F68E5F;
+    border: none;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#searchBtn:hover {
+    box-shadow: 7px 5px 56px -14px #F76C5E;
+}
+   
+#searchBtn:active {
+    transform: scale(0.97);
+    box-shadow: 7px 5px 56px -10px #F76C5E;
+}
+
+#searchInput {
+    height: 80px;
+    font-size: 22px;
+}
