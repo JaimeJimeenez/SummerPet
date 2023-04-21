@@ -46,15 +46,17 @@
                    <div>
                         <h1 class = "bg-black text-white ps-4 rounded-2"  > Acerca de <%= usuario.Name %>: </h1>
                    </div>
-                   <%if(usuario.Description == null){%>
+                   <!-- <h1 class = ""><%= usuario.Id %> </h1> -->
+                   
+                   <% if(usuario.Description == null){ %>
                         <div>
                             <p class = "text-justify text-break bg-danger text-white p-3 rounded-2" id = 'noDescription'> <%= usuario.Name %> aun no ha añadido una descripción </p>
                         </div>
-                    <%}else{%>
+                    <% } else { %>
                         <div>
                             <h5 class = "text-justify text-break bg-white p-3 rounded-2"> <%=usuario.Description%></h5>
                         </div>
-                    <%}%>
+                    <% } %>
                 </div>
 
             </div>

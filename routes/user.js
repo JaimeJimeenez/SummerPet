@@ -30,8 +30,24 @@ router.get('/profile', (request, response) => {
         if (err) console.log(err);
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
-            else response.render('profile', { usuario : user, accepted : accepted });
+            else  response.render('profile', { usuario : user, accepted : accepted });
+            
+            // daoUser.havePhotosLocation(id,(err, hasPhotos)=>{
+                // if(err) console.log(err)
+                // else response.render('profile', { usuario : user, accepted : accepted });
+            // });
         });
+    });
+});
+
+router.post("/enviarImagen", multerFactory.single('foto'), function(request, response) {
+    // let id = Number(request.query.id);
+    if (request.file) console.log(request.file);
+    console.log("🚀 ~ file: user.js:45 ~ router.post ~ id:", request.query)
+    
+    daoUser.enviarImagen(request.file.buffer, id, (err) => {
+        if (err) console.log(err);
+        else response.redirect('/user/profile');
     });
 });
 

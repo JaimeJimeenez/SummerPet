@@ -3,18 +3,17 @@
   
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"> dsafsdf </h4>
+        <h4 class="modal-title"> Sube fotos del lugar de cuidado </h4>
         <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
       </div>
-      <% if (typeof error !== 'undefined') { %>
+      <!-- <% if (false) { %>
         <h1>HOLA</h1>
-        <% } %>
-        <% else { %>
+        <% } else { %>
           <h1>ADIOS</h1>
-      <% } %>
-      <form action = "enviarImagen" method = 'post' enctype = "multipart/form-data">
+      <% } %> -->
+      <form class="mx-3 my-3 "action = "enviarImagen" method = 'post' enctype = "multipart/form-data">
           <label for = "foto"></label>
-          <input type = "file" name = 'foto'>
+          <input type = "file" name = 'foto'  id = 'idDogWatcher' value = '<%= usuario.Id %>''>
           <button type = "submit"> Enviar</button>
       </form>
     

@@ -19,13 +19,13 @@ class DAOUser {
         });
     }
 
-    enviarImagen(imagen, callback) {
+    enviarImagen(imagen,id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
             else {
-                const sql = 'update User set Photo = ? where Id = 3;';
+                const sql = 'insert into photoslocation (photo) values (?) where IdDogWatcher =  ?;';
 
-                connection.query(sql, [imagen], (err, result) => {
+                connection.query(sql, [imagen,id], (err, result) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null);
