@@ -70,7 +70,8 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
                     }     
                     
                     request.session.user = user;
-                    response.redirect('/');
+                    response.locals.user = user;
+                    response.render('index');
                 }
             });
         }
@@ -90,14 +91,16 @@ router.post('/signIn', (request, response) => {
         else if (!user) response.render('signIn', { signError : true });
         else {
             request.session.user = user;
-            response.redirect('/');
+            response.locals.user = user;
+            response.render('index');
         }
     });
 });
 
 router.get('/logout', yetLogIn, (request, response) => {
     request.session.destroy();
-    response.redirect('/');
+    response.locals.user = undefined;
+    response.render('index');
 });
 
 router.get('/profile', yetLogIn, (request, response) => {
@@ -178,6 +181,7 @@ router.get('/specialties', yetLogIn, (request, response) => {
         });
     });
 });
+
 router.get('/getDisponibility/:id', (request, response) => {
     let id = Number(request.params.id);
     
@@ -190,10 +194,9 @@ router.get('/getDisponibility/:id', (request, response) => {
         else response.json({ disponibilities : disponibilities });
     })
 });
+
 router.post('/establishDisponibility', (request, response) => {
     response.status(200);
-    
-    console.log(request.body);
 
     let dates = request.body.date.split('-');
     let dateStart = dates[0].split('/');
@@ -201,8 +204,6 @@ router.post('/establishDisponibility', (request, response) => {
     let start = new Date(dateStart[2], dateStart[1] - 1, dateStart[0]);
     let end = new Date(dateEnd[2], dateEnd[1] - 1, dateEnd[0]);
     
-    console.log(start);
-    console.log(end);
     if (!isNaN(Date.parse(start)) && !isNaN(Date.parse(end))) 
         daoUser.insertDisponibility(request.body.id, start, end, (err) => {
             if (err) {
@@ -214,6 +215,13 @@ router.post('/establishDisponibility', (request, response) => {
         response.status(400);
         response.end();
     }
+});
+
+router.get('/searchKeyword', (request, response) => {
+    daoUser.searchByKeyWord(request.query.keyword, (err, users) => {
+        if (err) console.log(err);
+        else response.render('search', { usuarios : users });
+    });
 });
 
 module.exports = { router, pool };
