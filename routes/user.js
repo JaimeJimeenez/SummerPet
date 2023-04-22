@@ -232,19 +232,18 @@ router.get('/getValorations', (request, response) => {
         response.end('Incorrect petition');
     } else daoUser.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
+        else daoApplication.hasAcceptedApplication(request.session.user.Id, id, (err, accepted) => {
             if (err) console.log(err);
             else daoUser.getValorations(id, (err, valorations) => {
                 if (err) console.log(err);
-                else {
+                else if (valorations.length !== 0) {
                     let note = 0;
         
                     valorations.forEach(valoration => note += valoration.Valoration );
-                    note /= valorations.length;
+                    if (note !== 0) note /= valorations.length;
                     valorations.half = Math.round(note);
-                    console.log(valorations);
                     response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted });
-                }
+                } else response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted});
             });
         });
     }); 

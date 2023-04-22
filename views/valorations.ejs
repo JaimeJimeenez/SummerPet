@@ -29,13 +29,6 @@
     <script src = '/javascript/showApplication.js'></script>
     <script src = '/javascript/sendRequest.js'></script>
     <script src = '/javascript/establishDisponibility.js'></script>
-    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#startDate').datepicker(); 
-            $('#endDate').datepicker();
-        });
-    </script>
 
 </head>
 <body>
@@ -60,7 +53,7 @@
                     </div>
 
                     <%if (valorations.length === 0) {%>
-                         <div>
+                         <div id = 'noValorations'>
                              <p class = "text-justify text-break bg-danger text-white p-3 rounded-2"> <%= usuario.Name %> aún no tiene ninguna valoración </p>
                          </div>
                      <% } else { %>
@@ -86,7 +79,7 @@
                      <%}%>
                 </div>
 
-                <div class = "row mt-3 p-3">
+                <div class = "row mt-3 p-3" id = 'listValorations'>
                     <ul>
                         <% valorations.forEach((valoration) => { %>
             
