@@ -64,13 +64,28 @@ class DAOUser {
         });
     }
 
-    enviarImagen(imagen, callback) {
+    getPhotos(id, callback) {
         this.pool.getConnection((err, connection) => {
-            if (err) callback(new Error('Error de conexion a la base de datos: ' + err.message));
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'update User set Photo = ? where Id = 3;';
+                const sql = 'Select * from PhotosLocation where IdDogWatcher = ?;';
 
-                connection.query(sql, [imagen], (err, result) => {
+                connection.query(sql, [id], (err, photos) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, photos);
+                });
+            }
+        });
+    }
+
+    insertPhotoLocation(id, image, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert into PhotosLocation (IdDogWatcher, Photo) values (?, ?);';
+
+                connection.query(sql, [id, image], (err) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null);
@@ -111,37 +126,6 @@ class DAOUser {
         });
     }
 
-    havePhotosLocation(id, callback) {
-        this.pool.getConnection((err, connection) => {
-            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
-            else {
-                const sql = 'Select count(*) from UserPhotos where idUser = ?;';
-
-                connection.query(sql, [id], (err, numPhotos) => {
-                    connection.release();
-                    if (err) new Error('Error de acceso a la base de dato: ' + err.message);
-                    else if (numPhotos[0]['count(*)'] === 0) callback(null, false);
-                    else callback(null, true);
-                });
-            }
-        });
-    }
-
-    getPhotosLocation(id, callback) {
-        this.pool.getConnection((err, connection) => {
-            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
-            else {
-                const sql = 'Select IdPhoto from UserPhotos where IdUser = ?';
-
-                connection.query(sql, [id], (err, photos) => {
-                    connection.release();
-                    if (err) new Error('Error de acceso a la base de datos: ' + err.message);
-                    else callback(null, photos);
-                });
-            }
-        });
-    }
-
     getDogSizes(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
@@ -167,21 +151,6 @@ class DAOUser {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                     else callback(null, breeds);
-                });
-            }
-        });
-    }
-
-    insertUserPhoto(idUser, idPhoto, callback) {
-        this.pool.getConnection((err, connection) => {
-            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
-            else {
-                const sql = 'Insert into UserPhotos values (?, ?);';
-
-                connection.query(sql, [idUser, idPhoto], (err) => {
-                    connection.release();
-                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
-                    else callback(null);
                 });
             }
         });

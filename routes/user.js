@@ -141,7 +141,7 @@ router.get('/picturesLocation', yetLogIn, (request, response) => {
         if (err) console.log(err);
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
-            else daoUser.getPhotosLocation(id, (err, photos) => {
+            else daoUser.getPhotos(id, (err, photos) => {
                 if (err) console.log(err);
                 else response.render('locationPhotos', { usuario : user, photos : photos, accepted : accepted });
             });
@@ -222,6 +222,27 @@ router.get('/searchKeyword', (request, response) => {
         if (err) console.log(err);
         else response.render('search', { usuarios : users });
     });
+});
+
+router.get('/getPhotos/:id', (request, response) => {
+    let id = Number(request.params.id);
+
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petitions');
+    } else daoUser.getPhotos(id, (err, photos) => {
+        if (err) next(err);
+        else response.json({ photos : photos.length });
+    });
+});
+
+router.post('/insertPhotoLocation', multerFactory.single('photo'), (request, response) => {
+    response.status(200);
+
+    daoUser.insertPhotoLocation(request.query.id, request.file.buffer, (err) => {
+        if (err) console.log(err);
+        else response.render('index');
+    })
 });
 
 router.get('/getValorations', (request, response) => {

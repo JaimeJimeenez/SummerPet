@@ -19,6 +19,7 @@
     <script type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src = '/javascript/establishDisponibility.js'></script>
+    <script src = '/javascript/establishPhotos.js'></script>
 
 </head>
 <body class = 'bgLightBlue'>
@@ -64,6 +65,7 @@
 
         <% if (locals.user) { %>
             <%- include('partials/modals/establishDisponibility') %>
+            <%- include('partials/modals/establishPhotos') %>
         <% } %>
         
     </div>

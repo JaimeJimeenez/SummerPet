@@ -1,0 +1,34 @@
+<div class = "modal fade" id = "establishPhotos" role="dialog">
+    <div class = "modal-dialog modal-dialog-centered modal-md">
+    
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title"> Establecer fotos </h4>
+          <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
+        </div>
+
+            <form action = "/user/insertPhotoLocation?id=<%=locals.user.Id%>" method = 'post' enctype = "multipart/form-data">
+    
+                <div class="modal-body">
+    
+                    <div class = "row align-items-center d-flex justify-content-center" id = 'uploadPhotos'>
+                        <label for = "photo" class = 'col col-sm-2 col-md-2 col-xl-2'> Foto: </label>
+                        <input type = 'file' class = "form-control w-50" id = 'photo' name = 'photo' placeholder = "Fecha de hoy o posterior">
+                    </div>
+    
+                    <div class = "row d-none align-items-center" id = 'noMorePhotos'>
+                        <span class = 'text-danger text-center'> Limite de fotos alcanzado </span>
+                    </div>
+
+                </div>
+    
+                <div class="modal-footer">  
+                  <button type = 'submit' class = 'btn btn-primary' id = 'photosButton' disabled> Enviar solicitud </button>
+                  <button type = "button" class = "btn btn-danger" data-bs-dismiss = "modal"> Cancelar </button>
+                </div>
+            </form>
+      </div>
+      
+  </div>
+</div>
