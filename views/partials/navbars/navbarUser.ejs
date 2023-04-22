@@ -1,14 +1,21 @@
 <nav class = 'rounded-2 p-3 d-flex' id = 'navUser'>
     
     <ul class = 'nav me-auto'>
+
         <li class = 'nav-item p-2'>
             <a href = "/user/profile?id=<%=usuario.Id%>" class = 'ms-1 nav-link navButton navLinks'> Descripción </a>
         </li>
+        
         <li class = 'nav-item p-2'>
             <a href = "/user/specialties?id=<%=usuario.Id%>" class = 'nav-link navButton navLinks' id = 'specialtiesButton'> Especialidades </a>
         </li>
+        
         <li class = 'nav-item p-2'>
             <a href = "/user/picturesLocation?id=<%=usuario.Id%>" class = 'nav-link navButton navLinks' id = 'picturesBtn'> Lugar</a>
+        </li>
+
+        <li class = 'nav-item p-2'>
+            <a href = "/user/getValorations?id=<%=usuario.Id%>" class = 'nav-link navButton navLinks'> Valoraciones </a>
         </li>
 
     </ul>
