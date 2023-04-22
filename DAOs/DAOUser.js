@@ -191,9 +191,10 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Select * from User Where (instr(Name, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1;';
+                console.log(keyWord);
+                const sql = 'Select * from User Where (instr(Name, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1 and Active = 1;';
 
-                connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
+                connection.query(sql, [keyWord, keyWord], (err, rows) => {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, rows);

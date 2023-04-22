@@ -1,6 +1,6 @@
 <div class = "d-flex">
     <% if (locals.user === undefined) { %>
-        <button type = 'button' class = 'btn btn-primary me-2'>
+        <button type = 'button' class = 'btn btn-primary me-2' id = 'signInBtn'>
             <a href = "/user/signIn" class = 'text-decoration-none text-white'> Iniciar sesión </a>
         </button>
         <button type = 'button' class = 'btn btn-primary me-2'>
@@ -8,7 +8,7 @@
         </button>
     <% } else { %>
         <div class = "d-flex me-2 dropdown dropstart">
-            <button type = "button" class = "btn btn-primary dropdown-toggle" data-bs-toggle = "dropdown">
+            <button type = "button" class = "btn btn-primary dropdown-toggle" data-bs-toggle = "dropdown" id = 'options'>
                 <% if (!user.Photo) { %>
                     <img src = "/images/noImageUser.png" alt = "Imagen predefinida" class = 'rounded-circle' width="25" height="25">
                 <% } else { %>
@@ -36,7 +36,7 @@
                 <% } %>
                 
                 <li>
-                    <a class = 'dropdown-item' href = "/user/logout"> Cerrar sesión </a>
+                    <a class = 'dropdown-item' href = "/user/logout" id = 'logoutBtn'> Cerrar sesión </a>
                 </li>
             </ul>
         </div>
