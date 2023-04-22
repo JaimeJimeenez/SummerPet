@@ -224,4 +224,30 @@ router.get('/searchKeyword', (request, response) => {
     });
 });
 
+router.get('/getValorations', (request, response) => {
+    let id = Number(request.query.id);
+
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    } else daoUser.getUser(id, (err, user) => {
+        if (err) console.log(err);
+        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
+            if (err) console.log(err);
+            else daoUser.getValorations(id, (err, valorations) => {
+                if (err) console.log(err);
+                else {
+                    let note = 0;
+        
+                    valorations.forEach(valoration => note += valoration.Valoration );
+                    note /= valorations.length;
+                    valorations.half = Math.round(note);
+                    console.log(valorations);
+                    response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted });
+                }
+            });
+        });
+    }); 
+});
+
 module.exports = { router, pool };
