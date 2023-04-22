@@ -201,12 +201,15 @@ router.post('/establishDisponibility', (request, response) => {
     let start = new Date(dateStart[2], dateStart[1] - 1, dateStart[0]);
     let end = new Date(dateEnd[2], dateEnd[1] - 1, dateEnd[0]);
     
-    if (!isNaN(Date.parse(start)) && !isNaN(Date.parse(end))) daoUser.insertDisponibility(request.body.id, start, end, (err) => {
-        if (err) {
-            response.status(400);
-            response.end();
-        } else response.json({});
-    });
+    console.log(start);
+    console.log(end);
+    if (!isNaN(Date.parse(start)) && !isNaN(Date.parse(end))) 
+        daoUser.insertDisponibility(request.body.id, start, end, (err) => {
+            if (err) {
+                response.status(400);
+                response.end();
+            } else response.json({});
+        });
     else {
         response.status(400);
         response.end();
