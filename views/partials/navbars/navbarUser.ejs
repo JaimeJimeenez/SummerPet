@@ -1,19 +1,21 @@
-<nav class = 'rounded-2 bg-light p-3' id = 'navUser'>
-    <ul class = 'nav'>
+<nav class = 'rounded-2 bg-light p-3 d-flex' id = 'navUser'>
+    <ul class = 'nav me-auto'>
         <li class = 'nav-item'>
-            <a href = "/profile?id=<%=usuario.Id%>" class = 'ms-1 nav-link' id = 'specialtiesButton'> 
+            <a href = "/user/profile?id=<%=usuario.Id%>" class = 'ms-1 nav-link'> 
                 Descripción 
             </a>
         </li>
         <li class = 'nav-item'>
-            <a href = "/specialty?id=<%=usuario.Id%>" class = 'ms-1 nav-link' id = 'specialtiesButton'> 
-                Especialidades 
-            </a>
+            <a href = "/user/specialties?id=<%=usuario.Id%>" class = 'nav-link' id = 'specialtiesButton'> Especialidades </a>
         </li>
         <li class = 'nav-item'>
-            <a href = "/picturesLocation?id=<%=usuario.Id%>" class = 'ms-1 nav-link'> 
-                Lugar
-            </a>
+            <a href = "/user/picturesLocation?id=<%=usuario.Id%>" class = 'nav-link' id = 'picturesBtn'> Lugar</a>
+        </li>
+        <li class = 'nav-item'>
+            <a href = "/application/applications?id=<%=usuario.Id%>" id = 'myApplicsButton' class = 'nav-link'> Mis solicitudes </a>
         </li>
     </ul>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#modalRequest" id = 'sendApplicationBtn'> Solicitar servicios </button>
+
 </nav>

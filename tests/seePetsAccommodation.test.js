@@ -3,10 +3,10 @@
 const mysql = require('mysql');
 const config = require('../config');
 
-const DAOUsuario = require('../DAOs/DAOUsuario');
+const DAOUser = require('../DAOs/DAOUser');
 const {render,screen} = require('@testing-library/jest-dom')
 const pool = mysql.createPool(config.mysqlConfig);
-const daoUsuario = new DAOUsuario(pool);
+const daoUser = new DAOUser(pool);
 
 describe('see carers accommodation for the pet test', () => {
   test('Displays 2 pictures uploaded by Jaime', done => {
@@ -31,7 +31,7 @@ describe('see carers accommodation for the pet test', () => {
     daoUsuario.getPhotosLocation(1,callback);
   });
 
- test('Displays an error message in Marias profile', done => {
+ test('Displays an error message in Miguel profile', done => {
     function callback(error, data) {
       if (error) {
         done(error);
@@ -41,7 +41,7 @@ describe('see carers accommodation for the pet test', () => {
         
         expect(data).toBeDefined();
         expect(data).toStrictEqual([]);
-        const usuario = { nombre: 'Maria' }; // Simula usuario sin Photos
+        const usuario = { nombre: 'Miguel' }; // Simula usuario sin Photos
         const mensajeError = 'No existen fotos de momento';
         expect(() => {
           // Función que verifica que se muestra el mensaje de error

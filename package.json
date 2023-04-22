@@ -32,9 +32,13 @@
   "dependencies": {
     "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-mysql-session": "^3.0.0",
+    "express-session": "^1.17.3",
+    "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
