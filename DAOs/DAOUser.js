@@ -206,7 +206,7 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Insert Disponibility (IdDogWatcher, StartDate, EndDate) values(?, ?, ?);';
+                const sql = 'Insert into Disponibility (IdDogWatcher, StartDate, EndDate) values (?, ?, ?);';
 
                 connection.query(sql, [id, startDate, endDate], (err) => {
                     connection.release();
