@@ -1,22 +1,21 @@
-<nav class = 'rounded-2  p-3' id = 'navUser'>
-    <ul class = 'nav' >
-        <li class = 'nav-item me-2' id="">
-            <a href = "/profile?id=<%=usuario.Id%>" class = 'ms-1 button2' id = 'navLinks'> 
-                Descripción 
-            </a>
+<nav class = 'rounded-2 p-3 d-flex' id = 'navUser'>
+    
+    <ul class = 'nav me-auto'>
+        <li class = 'nav-item p-2'>
+            <a href = "/user/profile?id=<%=usuario.Id%>" class = 'ms-1 nav-link navButton navLinks'> Descripción </a>
         </li>
-        <li class = 'nav-item me-2' id="">
-            <a href = "/specialty?id=<%=usuario.Id%>" class = 'ms-1 nav-link button2' id = 'navLinks'> 
-                Especialidades
-            </a>
+        <li class = 'nav-item p-2'>
+            <a href = "/user/specialties?id=<%=usuario.Id%>" class = 'nav-link navButton navLinks' id = 'specialtiesButton'> Especialidades </a>
         </li>
-        <li class = 'nav-item me-2' id=""> 
-            <a href = "/picturesLocation?id=<%=usuario.Id%>" class = 'ms-1 nav-link button2' id = 'navLinks'> 
-                Lugar
-            </a>
+        <li class = 'nav-item p-2'>
+            <a href = "/user/picturesLocation?id=<%=usuario.Id%>" class = 'nav-link navButton navLinks' id = 'picturesBtn'> Lugar</a>
         </li>
+
     </ul>
     
-    <button type="button" class="btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#modalRequest" id = 'sendApplicationBtn'> Solicitar servicios </button>
+    <% if (!locals.user.isDogWatcher) { %>
+        <button type = 'button' class = 'btn btn-primary' data-bs-toggle = 'modal' data-bs-target = '#modalRequest' id = 'sendApplicationBtn'> Solicitar servicios </button>        
+    <% } %>
+    
 
 </nav>

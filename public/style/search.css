@@ -1,23 +1,20 @@
-ul {
+#listUsers {
     list-style-type: none;
 }
 
-li {
+#userInfo {
     border-radius: 10px;
     background-color:white;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
  
 #searchbardiv {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* height: 70vh;   */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 } 
 
-
 #input{
-     /* width: 600px; */
     height: 80px;
     font-size: 22px;
 }
@@ -31,28 +28,3 @@ li {
 #bgLightBlue{
     background-color: #BDD4F2;
 }
-
-#bottone1 {
-    font-size: 22px;
-    height: 80px;
-    padding-left: 33px;
-    padding-right: 33px;
-    padding-bottom: 16px;
-    padding-top: 16px;
-    border-radius: 9px;
-    background: #F68E5F;
-    border: none;
-    font-family: inherit;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
-   }
-   
-   #bottone1:hover {
-    box-shadow: 7px 5px 56px -14px #F76C5E;
-   }
-   
-   #bottone1:active {
-    transform: scale(0.97);
-    box-shadow: 7px 5px 56px -10px #F76C5E;
-   }

@@ -1,21 +1,26 @@
 <header>
-    <nav style="background-color: #364F70" class= 'navbar'>
-        <div class = "container-fluid d-flex justify-content-between"  >
-            <a class = 'navbar-brand' href = "/">
-                <div class="row">
-                    <div class="col">
-                        <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
-                    </div>    
-                    <div class="col">    
-                        <h1 class =" text-white" > SummerPet</h1>
-                    </div>
-                </div>
-            </a>
-            <form method = 'GET' action = 'searchKeyWord' class = 'd-flex'>
+
+    <nav class = 'navbar' style = "background-color: #364F70">
+
+        <div class = "container-fluid d-flex justify-content-between" >
+
+            <div class = "d-flex">
+                <a class = 'navbar-brand' href = "/">
+                    <img src = "/images/logo.png" alt = "Logo aplicación" class = 'rounded-circle'>
+                </a>
+                <a href = "/" class = 'text-decoration-none''><h1 class ="mt-1 text-white mr-auto" > SummerPet</h1></a>
+            </div>
+
+            <form method = 'GET' action = '../searchKeyWord' class = 'd-flex'>
+
                 <label for = "keyword"></label>
-                <input class="form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
+                <input class = "form-control me-2" type="text" placeholder = "Palabra Clave" name = 'keyword' maxlength="150">
                 <button class="btn btn-primary" type = "submit">Search</button>
+
             </form>
+
+            <%- include ('./headerOptions') %>
         </div>
+
     </nav>
 </header>

@@ -4,6 +4,36 @@ class DAOUser {
 
     constructor(pool) { this.pool = pool; }
 
+    signUp(name, email, password, direction, phone, description, image, isDogWatcher, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert into User (Name, Email, Photo, Password, Direction, Description, Phone, isDogWatcher, Active) values (?, ?, ?, ?, ?, ?, ?, ?, 1);';
+
+                connection.query(sql, [name, email, image, password, direction, description, phone, isDogWatcher], (err, newUser) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null, newUser.insertId);
+                });
+            }
+        });
+    }
+
+    signIn(email, password, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from User where Email = ? and Password = ?;';
+
+                connection.query(sql, [email, password], (err, user) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null, user[0]);
+                });
+            }
+        });
+    }
+
     getUser(id, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
@@ -14,6 +44,21 @@ class DAOUser {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, user[0]);
+                });
+            }
+        });
+    }
+
+    userExists(email, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from User where Email = ?;';
+
+                connection.query(sql, [email], (err, user) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null, user.length === 1);
                 });
             }
         });
@@ -146,12 +191,43 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Select * from User Where (instr(Name, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1;';
+                console.log(keyWord);
+                const sql = 'Select * from User Where (instr(Name, ?) or instr(Direction, ?) > 0) and isDogWatcher = 1 and Active = 1;';
 
-                connection.query(sql, [keyWord, keyWord, keyWord, keyWord], (err, rows) => {
+                connection.query(sql, [keyWord, keyWord], (err, rows) => {
                     connection.release();
                     if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
                     else callback(null, rows);
+                });
+            }
+        });
+    }
+
+    insertDisponibility(id, startDate, endDate, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
+            else {
+                const sql = 'Insert into Disponibility (IdDogWatcher, StartDate, EndDate) values (?, ?, ?);';
+
+                connection.query(sql, [id, startDate, endDate], (err) => {
+                    connection.release();
+                    if (err) callback(new Error('No se pudo acceder a la base de datos: ' + err.message));
+                    else callback(null);
+                });
+            }
+        });
+    }
+
+    getDisponibility(id, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select StartDate, EndDate from Disponibility where IdDogWatcher = ?;';
+
+                connection.query(sql, [id], (err, disponibilities) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, disponibilities);
                 });
             }
         });

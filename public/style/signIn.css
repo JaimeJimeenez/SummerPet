@@ -1,0 +1,15 @@
+.bgLightBlue {
+    background-color: #BDD4F2;
+}
+
+#bgBlue {
+    background-color: #364F70;
+}
+
+#signInForm {
+    margin-left: 35%;
+    margin-right: 35%;
+    background-color: #364F70;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
