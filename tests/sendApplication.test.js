@@ -22,5 +22,5 @@ test('Send one application', done => {
         }
     }
 
-    daoApplication.newApplication(1, new Date('2023-04-08'), new Date('2023-04-10'), callback);
+    daoApplication.newApplication(2, new Date('2023-04-29'), new Date('2023-04-30'), callback);
 });

@@ -1,37 +1,35 @@
 describe('show carers profile details', () => {
-    const nombre = 'Jaime'; 
+    const nombre = 'Pruebas'; 
 
     beforeEach(() => {
         cy.visit('http://localhost:3000');
-        cy.get('input').type(`${nombre}{enter}`);
-        cy.get('a.btn.btn-primary').click();
-        cy.get('#sendApplicationBtn').click();
     })
 
-    it('endDate is sooner than startDate', () => {
-        const startDate = '03/31/2023'; 
-        const endDate = '03/30/2023';
-    
-        cy.get('[id=startDate]').type(`${startDate}{enter}`);
-        cy.get('[id=endDate]').type(`${endDate}{enter}`);
+    it('View user with valorations', () => {
+        const pruebas = 'pruebas';
+        const email = 'luis@ucm.es';
+        const password = 'luisucmes';
+  
+        cy.get('input').type(`${pruebas}{enter}`);
+        cy.get('#showProfile').click();
+  
+        cy.get('#signInForm').should('be.visible');        
+        cy.get('input[name=email]').type(`${email}`);
+        cy.get('input[name=password]').type(`${password}{enter}`);
+  
+        cy.get('#searchInput').type(`${pruebas}{enter}`);
+        cy.get('#showProfile').click();
+  
+        cy.get('#sendApplicationBtn').click();
 
-        cy.get('[id=applicationButton]').should('be.disabled');
+        const daterangepicker = cy.get('#datesDisponibility');
+
+        cy.get('.ranges li').contains('21/05/2023 - 27/05/2023').click();
+        
+        cy.get('#applicationButton').click();
+
+        cy.get('#options').click();
+        cy.get('#logoutBtn').click();
+        cy.get('#signInBtn').should('be.visible');
     });
-
-    it('startDay is sooner than current date', () => {
-        const startDate = '03/01/2023';
-        cy.get('[id=startDate]').type(`${startDate}{enter}`);
-        cy.get('[id=applicationButton]').should('be.disabled');
-    });
-
-
-    it('Application can be completed', () => {
-        const startDate = '03/30/2023';
-        const endDate = '03/31/2023'; 
-    
-        cy.get('[id=startDate]').type(`${startDate}{enter}`);
-        cy.get('[id=endDate]').type(`${endDate}{enter}`);
-
-        cy.get('[id=applicationButton]').should('be.enabled');
-    }); 
 })

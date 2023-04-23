@@ -23,7 +23,7 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('No se pudo conectar a la base de datos: ' + err.message));
             else {
-                const sql = 'Select * from User where Email = ? and Password = ?;';
+                const sql = 'Select * from User where Email = ? and Password = ? and Active = 1;';
 
                 connection.query(sql, [email, password], (err, user) => {
                     connection.release();

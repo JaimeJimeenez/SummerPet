@@ -10,7 +10,7 @@
             <div id = 'profileName' class = "row"> <%= usuario.Name %> </div>
             <div id = 'profileDirection' class = "row h5"> <%= usuario.Direction %> </div>
 
-            <% if (accepted) { %>
+            <% if (accepted || locals.user.Id === usuario.Id) { %>
                 <div class = 'row h6' id = 'profileEmail'> <%= usuario.Email %></div>
                 <div class = 'row h6' id = 'profilePhone'> <%= usuario.Phone %></div>
             <% } %>

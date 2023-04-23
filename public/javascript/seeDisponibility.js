@@ -1,10 +1,6 @@
 'use strict'
 
 $(function() {
-    
-});
-
-$(function() {
   $('#btn-calendar').on('click', () => {
     const id = $('#btn-calendar').data('id');
 

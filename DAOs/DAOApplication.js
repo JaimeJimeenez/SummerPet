@@ -102,7 +102,7 @@ class DAOApplication {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select count(*) from Application join UserApplication on IdOwner = ? and IdDogWatcher = ? and IdApplication = Id where Accepted = 1 and Active = 1;';
+                const sql = 'Select count(*) from Application join UserApplication on IdOwner = ? and IdDogWatcher = ? and IdApplication = Id where Accepted = 1 and FinalDate > NOW() and Active = 1;';
 
                 connection.query(sql, [idOwner, idDogWatcher], (err, result) => {
                     connection.release();
