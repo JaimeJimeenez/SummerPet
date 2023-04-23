@@ -5,7 +5,7 @@
 
         <div class="modal-header">
           <h4 class="modal-title"> Establecer fotos </h4>
-          <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
+          <button type = "button" class = "btn btn-close modal-close-button" data-bs-dismiss = "modal"></button>
         </div>
 
             <form action = "/user/insertPhotoLocation?id=<%=locals.user.Id%>" method = 'post' enctype = "multipart/form-data">
@@ -25,7 +25,7 @@
     
                 <div class="modal-footer">  
                   <button type = 'submit' class = 'btn btn-primary' id = 'photosButton' disabled> Enviar solicitud </button>
-                  <button type = "button" class = "btn btn-danger" data-bs-dismiss = "modal"> Cancelar </button>
+                  <button type = "button" class = "btn btn-danger" data-bs-dismiss = "modal" id = 'cancelBtn'> Cancelar </button>
                 </div>
             </form>
       </div>
