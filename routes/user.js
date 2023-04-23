@@ -263,6 +263,7 @@ router.get('/getValorations', (request, response) => {
                     valorations.forEach(valoration => note += valoration.Valoration );
                     if (note !== 0) note /= valorations.length;
                     valorations.half = Math.round(note);
+                    console.log(valorations);
                     response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted });
                 } else response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted});
             });

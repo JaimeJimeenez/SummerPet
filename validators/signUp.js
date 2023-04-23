@@ -7,7 +7,8 @@ const validateSignUp = [
     check('username', 'Nombre incorrecto').isLength( { min: 1, max: 20 }),
     check('password', 'Contraseña no válida').isLength( { min : 8, max : 20 }),
     check('email', 'Correo no válido').isEmail(),
-    check('phone', 'Introduce un telefono').notEmpty()
+    check('phone', 'Introduce un télefono').notEmpty(),
+    check('phone', 'Introduce un teléfono válido').matches(/^[0-9]+$/)
 ];
 
 const validationMiddleware = (request, response, next) => {

@@ -206,7 +206,7 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select * from Valorations where IdDogWatcher = ?;';
+                const sql = 'Select IdOwner, IdDogWatcher, Valoration, Valorations.Description, User.Name from Valorations join User on User.Id = IdOwner where IdDogWatcher = ?;';
 
                 connection.query(sql, [id], (err, rows) => {
                     connection.release();

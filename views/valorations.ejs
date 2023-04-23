@@ -86,11 +86,13 @@
             
                             <li class = 'p-4 mb-3 mt-3 rounded-2 list-unstyled' id = 'infoValoration'>
                                 <div class = 'row align-items-center'>
-                                    <div class = "col col-sm-9 col-md-9 col-xl-9 text-center"> <%= valoration.Description %> </div>
+                                    <div class = "col col-sm-2 col-md-2 col-xl-2 text-center text-white"> <%= valoration.Name %> </div>
+                                    <div class = "col col-sm-7 col-md-7 col-xl-7 text-center"> <%= valoration.Description %> </div>
                                     <div class = "col col-sm-2 col-md-2 col-xl-2 align-item-center text-center"> 
-                                        <% for (let i = 0; i < valorations.half; i++) { %>
+                                        <% for (let i = 0; i < valoration.Valoration; i++) { %>
                                             <span class = 'material-symbols-outlined' id = 'fillYellow'>star</span>
-                                        <% } %> </div>
+                                        <% } %>
+                                    </div>
                                 </div>
                             </li>
                         <%}); %>
