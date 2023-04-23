@@ -3,11 +3,10 @@ describe('View specialties', () => {
       cy.visit('http://localhost:3000');
     });
   
-    it('Jaimes specialties', () => {
-
-        const jaime = 'jaime';
+    it('Pruebas specialties', () => {
+        const pruebas = 'Pruebas';
         
-        cy.get('input').type(`${jaime}{enter}`);
+        cy.get('input').type(`${pruebas}{enter}`);
         cy.get('a.btn.btn-primary').click();
         
         cy.get('#specialtiesButton').click();
@@ -25,24 +24,21 @@ describe('View specialties', () => {
         cy.get('.labelSizes').should('contain', 'Pequeño');
 
         //Aparecen las razas de perro
-        cy.get('.labelBreed').should('contain', 'Husky');
-        cy.get('.labelBreed').should('contain', 'Golden Terrier');
+        cy.get('.labelBreed').should('contain', 'labrador');
         cy.get('.labelBreed').should('contain', 'Golden Retriever');
-        cy.get('.labelBreed').should('contain', 'Salchicha');
-        cy.get('.labelBreed').should('contain', 'Labrador');
     });
 
-    it('Miguel specialties', () => {
-        const miguel = 'Miguel';
+    it('Pruebas2 specialties', () => {
+        const pruebas2 = 'Prueba2';
         
-        cy.get('input').type(`${miguel}{enter}`);
+        cy.get('input').type(`${pruebas2}{enter}`);
         cy.get('a.btn.btn-primary').click();
         
         cy.get('#specialtiesButton').click();
         cy.get('.labelBreed').should('not.exist');
         cy.get('.labelSizes').should('not.exist');
 
-        cy.get("#sin-pref-razas").should('contain', miguel + ' no tiene preferencia en ninguna raza de perro');
-        cy.get('#sin-pref-tamanio').should('contain', miguel + ' no tiene preferencia en el tamaño de los perros');
+        cy.get("#sin-pref-razas").should('contain', pruebas2 + ' no tiene preferencia en ninguna raza de perro');
+        cy.get('#sin-pref-tamanio').should('contain', pruebas2 + ' no tiene preferencia en el tamaño de los perros');
     });          
 });

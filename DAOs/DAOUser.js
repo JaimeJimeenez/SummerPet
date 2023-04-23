@@ -130,7 +130,7 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select Dogsize.Size from User join userdogsize on userdogsize.Iduser = User.Id join dogsize on UserDogSize.IdDogSize = DogSize.Id where User.Id = ?;';
+                const sql = 'Select Size from DogSize where IdDogWatcher = ?;';
 
                 connection.query(sql, [id], (err, dogSizes) => {
                     connection.release();
@@ -145,7 +145,7 @@ class DAOUser {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Select Breed.Name from User join userdogbreed on userdogbreed.Iduser = User.Id join Breed on userdogbreed.IdDogBreed = Breed.Id where User.Id = ?;';
+                const sql = 'Select Name from Breed where IdDogWatcher = ?;';
 
                 connection.query(sql, [id], (err, breeds) => {
                     connection.release();

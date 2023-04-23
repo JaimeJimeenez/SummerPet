@@ -52,22 +52,21 @@ test('Multipe dog breeds', done => {
         }
         
         try {
-            var num_breeds = 5;
             var resultado = Object.assign({}, data);
             var index = 0;
-            while(index < num_breeds) {
+            while(index < data.length) {
                 resultado[index] = Object.assign({}, resultado[index]);
                 index++;
             };
             
-            expect(resultado).toEqual({"0" : {"Name": "Husky"}, "1": {"Name": "Golden Terrier"}, "2": {"Name": "Salchicha"}, "3": {"Name": "Golden Retriever"}, "4": {"Name": "Labrador"}});
+            expect(resultado).toEqual({"0" : {"Name": "labrador"}, "1": {"Name": "Golden Retriever"} });
             done();
         } catch (error) {
             done(error);
         }
     }
 
-    daoUser.getDogBreeds(1, callback);
+    daoUser.getDogBreeds(2, callback);
 });
 
 test('Multipe dog sizes', done => {
@@ -79,12 +78,17 @@ test('Multipe dog sizes', done => {
 
         try {
             var resultado = Object.assign({}, data);
-            expect(resultado).toEqual({"0": {"Size": "pequenio"}, "1": {"Size": "grande"}, "2": {"Size": "mediano"}});    
+            var index = 0;
+            while(index < data.length) {
+                resultado[index] = Object.assign({}, resultado[index]);
+                index++;
+            };
+            expect(resultado).toEqual({"0": {"Size": "Grande"}, "1": {"Size": "Mediano"}, "2": {"Size": "pequeño"}});    
             done();
         } catch (error) {
             done(error);
         }
     }
 
-    daoUser.getDogSizes(1, callback);
+    daoUser.getDogSizes(2, callback);
 });
