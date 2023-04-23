@@ -11,7 +11,7 @@ $(function() {
     console.log(id)
     
     $.ajax({
-        url: 'getDisponibility/' + id,
+        url: '/user/getDisponibility/' + id,
         type: 'GET',
         success: function(response) {
           console.log(response);

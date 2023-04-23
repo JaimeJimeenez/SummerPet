@@ -26,9 +26,10 @@
     <script type = "text/javascript" src = "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <script src = '/javascript/showApplication.js'></script>
     <script src = '/javascript/sendRequest.js'></script>
     <script src = '/javascript/establishDisponibility.js'></script>
+    <script src = '/javascript/seeDisponibility.js'></script>
+    <script src = '/javascript/establishPhotos.js'></script>
 
 </head>
 <body>
@@ -85,11 +86,13 @@
             
                             <li class = 'p-4 mb-3 mt-3 rounded-2 list-unstyled' id = 'infoValoration'>
                                 <div class = 'row align-items-center'>
-                                    <div class = "col col-sm-9 col-md-9 col-xl-9 text-center"> <%= valoration.Description %> </div>
+                                    <div class = "col col-sm-2 col-md-2 col-xl-2 text-center text-white"> <%= valoration.Name %> </div>
+                                    <div class = "col col-sm-7 col-md-7 col-xl-7 text-center"> <%= valoration.Description %> </div>
                                     <div class = "col col-sm-2 col-md-2 col-xl-2 align-item-center text-center"> 
                                         <% for (let i = 0; i < valoration.Valoration; i++) { %>
                                             <span class = 'material-symbols-outlined' id = 'fillYellow'>star</span>
-                                        <% } %> </div>
+                                        <% } %>
+                                    </div>
                                 </div>
                             </li>
                         <%}); %>
