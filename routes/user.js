@@ -111,8 +111,7 @@ router.get('/profile', yetLogIn, (request, response) => {
         response.end('Incorrect petition');
     } else daoUser.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
-            console.log(accepted);
+        else daoApplication.hasAcceptedApplication(request.session.user.Id, id, (err, accepted) => {
             if (err) console.log(err);
             else response.render('profile', { usuario : user, accepted : accepted });
            
