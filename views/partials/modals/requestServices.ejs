@@ -15,7 +15,11 @@
                 <input type = "text" name = 'idDogWatcher' id = 'idDogWatcher' value = '<%= usuario.Id %>'>
               </div>
 
-              <div class = "row align-items-center">
+              <div class = "row align-items-center justify-content-center text-center text-danger d-none" id = 'noDisponibility'>
+                <%= usuario.Name %> no se encuentra disponible actualmente
+              </div>
+
+              <div class = "row align-items-center" id = 'showDisponibility'>
                 <label for = "datesDisponibility" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Rango de fechas: </label>
                 <input type = 'text' class = "form-control w-50 datesDisponibility" id = 'datesDisponibility' name = 'datesDisponibility' placeholder = "">
               </div>

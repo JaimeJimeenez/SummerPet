@@ -51,6 +51,7 @@ router.get('/applications', (request, response) => {
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
             else daoApplication.listApplications(id, (err, applications) => {
+                console.log(applications);
                 if (err) console.log(err);
                 else response.render('applications', { usuario : user, applications : applications, accepted : accepted });
             });
