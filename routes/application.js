@@ -28,7 +28,7 @@ router.post('/sendApplication', (request, response) => {
     let start = new Date(dateStart[2], dateStart[1] - 1, dateStart[0]);
     let end = new Date(dateEnd[2], dateEnd[1] - 1, dateEnd[0]);
 
-    daoApplication.newApplication(request.body.idDogWatcher, start, end, (err) => {
+    daoApplication.newApplication(request.session.user.Id, request.body.idDogWatcher, start, end, (err) => {
         if (err) console.log(err);
         else daoUser.getUser(request.body.idDogWatcher, (err, user) => {
             if (err) console.log(err);

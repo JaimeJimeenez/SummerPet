@@ -4,7 +4,7 @@ class DAOApplication {
     
     constructor(pool) { this.pool = pool; }
 
-    newApplication(id, startDate, endDate, callback) {
+    newApplication(idOwner, idDogWatcher, startDate, endDate, callback) {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
@@ -13,7 +13,7 @@ class DAOApplication {
                 connection.query(sql, [startDate, endDate], (err, result) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
-                    else this.insertUserApplication(2, id, result.insertId, (err) => {
+                    else this.insertUserApplication(idOwner, idDogWatcher, result.insertId, (err) => {
                         if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
                         else callback(null, true);
                     });

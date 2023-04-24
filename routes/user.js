@@ -291,10 +291,6 @@ router.post('/valorateUser', (request, response) => {
     let idApplication = Number(ids[0]);
     let idDogWatcher = Number(ids[1]);
 
-    console.log(idApplication);
-    console.log(idDogWatcher);
-    console.log(request.body);
-
     if (!isNaN(idApplication) && !isNaN(idDogWatcher)) 
         daoValoration.insertValoration(request.session.user.Id, idDogWatcher, request.body.valoration, request.body.description, (err) => {
             if (err) {

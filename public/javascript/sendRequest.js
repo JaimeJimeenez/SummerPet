@@ -95,6 +95,8 @@ $(function() {
               
                 $('.drp-selected').remove();
                 //$('#datesDisponibility').data('daterangepicker').show();
+                $('#datesDisponibility').val('');
+                $('#applicationButton').attr('disabled', true);
             }
 
           },
