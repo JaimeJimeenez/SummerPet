@@ -5,7 +5,7 @@ describe('See view days application', () => {
   
     });
     
-    it('Sign up as a dog watcher', () => {
+    it('Sign up as a dogOwner', () => {
       const nombre = 'elena';
       const email = 'elena@ucm.es';
       const password = 'elenaucm';
@@ -33,12 +33,10 @@ describe('See view days application', () => {
       cy.get('textarea[name="description"]').should('exist');
       cy.get('textarea[name="description"]').type('Hola, este es mi mensaje');
 
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
     });
-    it('Dog watcher already exists', () => {
+    it('DogOwner already exists', () => {
       const nombre = 'Jaime';
       const email = 'jaime@ucm.es';
       const password = 'jaimeucm';
@@ -59,13 +57,12 @@ describe('See view days application', () => {
 
       cy.get('input[name="username"]').should('exist');
       cy.get('input[name=username]').type(`${nombre}`);
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
+
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
       cy.get('.alert').should('contain', 'El usuario ya existe');
     });
-    it('Dog watcher password invalid', () => {
+    it('DogOwner password invalid', () => {
       const nombre = 'elen';
       const email = 'elena@ucm.es';
       const password = 'elena';
@@ -83,14 +80,13 @@ describe('See view days application', () => {
 
       cy.get('input[name="username"]').should('exist');
       cy.get('input[name=username]').type(`${nombre}`);
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
+
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
       cy.get('.text-danger').should('contain', 'Contraseña no válida');
 
     });
-    it('Dog watcher hasnt inserted phone', () => {
+    it('DogOwner hasnt inserted phone', () => {
       const nombre = 'elen';
       const email = 'elena@ucm.es';
       const password = 'elenaucm';
@@ -108,14 +104,13 @@ describe('See view days application', () => {
 
       cy.get('input[name="username"]').should('exist');
       cy.get('input[name=username]').type(`${nombre}`);
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
+
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
       cy.get('.text-danger').should('contain', 'Introduce un télefono');
 
     });
-    it('Dog watchers email is invalid', () => {
+    it('DogOwner email is invalid', () => {
       const nombre = 'elen';
       const email = 'elena@ucm';
       const password = 'elenaucm';
@@ -135,14 +130,13 @@ describe('See view days application', () => {
 
       cy.get('input[name="username"]').should('exist');
       cy.get('input[name=username]').type(`${nombre}`);
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
+
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
       cy.get('.text-danger').should('contain', 'Correo no válido');
 
     });
-    it('Dog watchers telephone is invalid', () => {
+    it('DogOwner telephone is invalid', () => {
       const nombre = 'elen';
       const email = 'elena@ucm';
       const password = 'elenaucm';
@@ -162,8 +156,7 @@ describe('See view days application', () => {
 
       cy.get('input[name="username"]').should('exist');
       cy.get('input[name=username]').type(`${nombre}`);
-      cy.get('input[name="isDogWatcher"]').should('exist');
-      cy.get('input[name="isDogWatcher"]').check();
+
       cy.get('button[type="submit"]').should('exist');
       cy.get('button[type="submit"]').click();
       cy.get('.text-danger').should('contain', 'Introduce un teléfono válido');
