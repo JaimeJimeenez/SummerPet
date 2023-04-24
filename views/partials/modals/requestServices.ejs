@@ -7,7 +7,7 @@
           <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
         </div>
 
-        <form action = "sendApplication" method = 'post'>
+        <form action = "/application/sendApplication" method = 'post'>
             <div class="modal-body">
 
               <div class = "row d-none">
@@ -15,16 +15,16 @@
                 <input type = "text" name = 'idDogWatcher' id = 'idDogWatcher' value = '<%= usuario.Id %>'>
               </div>
 
-              <div class = "row align-items-center">
-                <label for = "startDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Fecha de inicio: </label>
-                <input type = 'text' class = "form-control w-50 startDate" id = 'startDate' name = 'startDate' placeholder = "Fecha de hoy o posterior">
-              </div>
-              <br>
-              <div class = "row align-items-center">
-                <label for = "endDate" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Fecha de fin: </label>
-                <input type = "text" class = 'form-control w-50 endDate' id = 'endDate' name = 'endDate' placeholder = "Fecha posterior a la de inicio">
+              <div class = "row align-items-center justify-content-center text-center text-danger d-none" id = 'noDisponibility'>
+                <%= usuario.Name %> no se encuentra disponible actualmente
               </div>
 
+              <div class = "row align-items-center" id = 'showDisponibility'>
+                <label for = "datesDisponibility" class = 'col col-sm-4 col-md-4 col-xl-4 text-center'> Rango de fechas: </label>
+                <input type = 'text' class = "form-control w-50 datesDisponibility" id = 'datesDisponibility' name = 'datesDisponibility' placeholder = "">
+              </div>
+            
+              <br>
               <div class = "row d-none align-items-center justify-content-center" id = 'errorApplication'>
                 <span class = 'text-danger text-center'> Fechas introducidas incorrectas </span>
               </div>

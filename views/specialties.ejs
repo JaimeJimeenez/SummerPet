@@ -24,6 +24,8 @@
     <script type = "text/javascript" src = "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     
     <script src = '/javascript/establishDisponibility.js'></script>
+    <script src = '/javascript/seeDisponibility.js'></script>
+    <script src = '/javascript/establishPhotos.js'></script>
 
 </head>
 <body>
@@ -79,18 +81,18 @@
                                     <div class = "row mt-2 d-flex justify-content-center">
                                         <div class = "col col-sm-6 col-md-6 col-xl-6 d-flex justify-content-center bg-light rounded-2 labelSizes">
                                             <div class="col col-sm-6 col-md-6 col-xl-6 mt-3">
-                                                <%if (dogSize.Size === "grande") { %>
-                                                    <img src = "/images/bigDog.png" alt = "Imagen de perro grande">
-                                                <% } else if (dogSize.Size === "mediano") { %>
-                                                    <img src = "/images/mediumDog.png" alt = "Imagen de perro mediano">
+                                                <%if (dogSize.Size === "grande" || dogSize.Size === "Grande") { %>
+                                                    <img src = "/images/bigDog.png" alt = "Imagen de perro grande" style="width: 70px;">
+                                                <% } else if (dogSize.Size === "mediano" || dogSize.Size === "Mediano") { %>
+                                                    <img src = "/images/mediumDog.png" alt = "Imagen de perro mediano"  style="width: 50px;">
                                                 <% } else { %>
-                                                    <img src = "/images/smallDog.png" alt = "Imagen de perro pequenio">
+                                                    <img src = "/images/smallDog.png" alt = "Imagen de perro pequenio"  style="width: 30px;" >
                                                 <% } %>
                                             </div>
                                             <div class = "col col-sm-6 col-md-6 col-xl-6 d-flex align-items-center">
-                                                <%if (dogSize.Size === "grande") { %>
+                                                <%if (dogSize.Size === "grande" || dogSize.Size === "Grande") { %>
                                                     Grande
-                                                <% } else if (dogSize.Size === "mediano"){ %>
+                                                <% } else if (dogSize.Size === "mediano" || dogSize.Size === "Mediano"){ %>
                                                     Mediano
                                                 <% } else { %>
                                                     Pequeño

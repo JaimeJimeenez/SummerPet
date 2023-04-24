@@ -20,11 +20,22 @@ const daoApplication = new DAOApplication(pool);
 
 // --------------------------
 router.post('/sendApplication', (request, response) => {
-    daoApplication.newApplication(request.body.idDogWatcher, new Date(request.body.startDate), new Date(request.body.endDate), (err) => {
+    response.status(200);
+
+    let dates = request.body.datesDisponibility.split('-');
+    let dateStart = dates[0].split('/');
+    let dateEnd = dates[1].split('/');
+    let start = new Date(dateStart[2], dateStart[1] - 1, dateStart[0]);
+    let end = new Date(dateEnd[2], dateEnd[1] - 1, dateEnd[0]);
+
+    daoApplication.newApplication(request.body.idDogWatcher, start, end, (err) => {
         if (err) console.log(err);
         else daoUser.getUser(request.body.idDogWatcher, (err, user) => {
             if (err) console.log(err);
-            else response.render('profile', { usuario : user });
+            else daoApplication.hasAcceptedApplication(request.session.user.Id, request.body.idDogWatcher, (err, accepted) => {
+                if (err) console.log(err);
+                else response.render('profile', { usuario : user, accepted : accepted });
+            });
         });
     });
 });
@@ -40,6 +51,7 @@ router.get('/applications', (request, response) => {
         else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
             if (err) console.log(err);
             else daoApplication.listApplications(id, (err, applications) => {
+                console.log(applications);
                 if (err) console.log(err);
                 else response.render('applications', { usuario : user, applications : applications, accepted : accepted });
             });
@@ -65,6 +77,7 @@ router.get('/getApplication/:id', (request, response, next) => {
 router.get('/acceptApplication/:id', (request, response) => {
     response.status(200);
     let id = Number(request.params.id);
+    console.log(id);
 
     if (!isNaN(id) && id >= 0) daoApplication.acceptApplication(id, (err) => {
         if (err) console.log(err);

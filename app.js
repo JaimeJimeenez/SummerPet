@@ -7,7 +7,7 @@ const path = require('path');
 const morgan = require('morgan');
 const express = require('express');
 const session = require('express-session');
-const mysqlsession = require('express-mysql-session');
+const mysqlSession = require('express-mysql-session');
 
 // File's Modules
 const config = require('./config');
@@ -16,12 +16,12 @@ const user = require('./routes/user');
 const application = require('./routes/application');
 
 // ----------- Middleware Session -----------
-const MYSQLStore = mysqlsession(session);
-const sessionStore = new MYSQLStore(config.mysqlConfig);
+const MySQLStore = mysqlSession(session);
+const sessionStore = new MySQLStore(config.mysqlConfig);
 
 const middlewareSession = session( {
     saveUninitialized: false,
-    secret: 'SummerPet',
+    secret: 'UCM-SMPT',
     resave: false,
     store: sessionStore
 });
