@@ -50,7 +50,7 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
     daoUser.userExists(request.body.email, (err, exists) => {
         if (err) console.log(err);
         else {
-            if (exists) response.render('signUp', { errors : [], exists : true });
+            if (!exists) response.render('signUp', { errors : [], exists : true });
             let photo = request.file === undefined ? null : request.file.buffer;
             let isDogWatcher = request.body.isDogWatcher === 'yes' ? 1 : 0;
             let description = request.body.description === '' ? null : request.body.description;
@@ -78,6 +78,7 @@ router.post('/signUp', multerFactory.single('image'), validateSignUp, validation
             });
         }
     });
+    
 });
 
 router.get('/signIn', alreadyLogIn, (request, response) => {
