@@ -1,0 +1,47 @@
+<div class = "modal fade" id = "modalValorate" role = "dialog">
+    <div class = "modal-dialog modal-dialog-centered modal-lg">
+    
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title"> Valorar usuario </h4>
+          <button type = "button" class = "btn btn-close" data-bs-dismiss = "modal"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div class = "row align-items-center d-flex justify-content-center" id = 'valorateUser'>
+
+            <div class = "row align-items-center d-flex justify-content-center">
+
+              <label for = "stars" class = 'col col-sm-2 col-md-2 col-xl-2'> Puntuación: </label>
+              <span class = 'col col-sm-3 col-md-3 col-xl-3'>
+                <% for (let i = 1; i <= 5; i++) { %>
+                  <span class = 'material-symbols-outlined stars' data-id = <%= i %>>star</span>
+                <% } %>
+              </span>
+            
+            </div>
+
+            <div class = "row">
+              <label for = "descriptionValoration">Comentarios:</label>
+              <textarea name = "descriptionValoration" class = 'form-control' maxlength = "100"></textarea>
+            </div>
+            
+          </div>
+
+          <div class = "row d-none align-items-center" id = 'noValorate'>
+            <span class = 'text-danger text-center'> No dispone de una solicitud con la que valorar al usuario </span>
+          </div>
+        
+        </div>
+
+      <div class="modal-footer">  
+        <button type = 'submit' class = 'btn btn-primary' id = 'sendValorationBtn' data-id = '' disabled> Aceptar </button>
+        <button type = "button" class = "btn btn-danger" data-bs-dismiss = "modal" id = 'cancelBtn'> Cancelar </button>
+      </div>
+    
+    </div>
+      
+  </div>
+</div>

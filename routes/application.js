@@ -48,7 +48,7 @@ router.get('/applications', (request, response) => {
         response.end('Incorrect petition');
     } else daoUser.getUser(id, (err, user) => {
         if (err) console.log(err);
-        else daoApplication.hasAcceptedApplication(2, id, (err, accepted) => {
+        else daoApplication.hasAcceptedApplication(request.session.user.Id, id, (err, accepted) => {
             if (err) console.log(err);
             else daoApplication.listApplications(id, (err, applications) => {
                 if (err) console.log(err);

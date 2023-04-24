@@ -3,14 +3,11 @@
 $(function() {
   $('#btn-calendar').on('click', () => {
     const id = $('#btn-calendar').data('id');
-
-    console.log(id)
     
     $.ajax({
         url: '/user/getDisponibility/' + id,
         type: 'GET',
         success: function(response) {
-          console.log(response);
           let ranges={};
           let i=1;
           

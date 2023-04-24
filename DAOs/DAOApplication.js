@@ -51,6 +51,21 @@ class DAOApplication {
             }
         });
     }
+
+    getApplicationsByOwner(idOwner, idDogWatcher, callback) {
+        this.pool.getConnection((err, connection) => {
+            if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
+            else {
+                const sql = 'Select * from Application join UserApplication on IdOwner = ? and IdDogWatcher = ? and IdApplication = Id where Accepted = 1 and FinalDate <= NOW() and Active = 1;';
+
+                connection.query(sql, [idOwner, idDogWatcher], (err, applications) => {
+                    connection.release();
+                    if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
+                    else callback(null, applications);
+                });
+            }
+        });
+    }
     
     listApplications(id, callback) {
         this.pool.getConnection((err, connection) => {
@@ -58,7 +73,6 @@ class DAOApplication {
             else {
                 const sql = 'select Name, Direction, a.Id, a.StartDate, a.FinalDate from user join userapplication on IdOwner=Id AND IdDogWatcher=? join application a on a.Id = IdApplication and Accepted = 0 and a.Active = 1 order by a.StartDate ASC';
                 
-
                 connection.query(sql, [id], (err, rows) => {
                     connection.release();
                     if (err) callback(new Error('Error de acceso a la base de datos: ' + err.message));
@@ -118,7 +132,7 @@ class DAOApplication {
         this.pool.getConnection((err, connection) => {
             if (err) callback(new Error('Error de conexión a la base de datos: ' + err.message));
             else {
-                const sql = 'Delete from Application where Id = ?;';
+                const sql = 'Update Application set Active = 0 where Id = ?;';
 
                 connection.query(sql, [id], (err) => {
                     connection.release();

@@ -91,7 +91,7 @@ $(function() {
             });
           
             $('.drp-selected').remove();
-            $('#datesDisponibility').data('daterangepicker').show();
+            //$('#datesDisponibility').data('daterangepicker').show();
           },
           error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
