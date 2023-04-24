@@ -28,13 +28,8 @@
     <script src = '/javascript/sendRequest.js'></script>
     <script src = '/javascript/establishDisponibility.js'></script>
     <script src = '/javascript/seeDisponibility.js'></script>
-
-    <script type = "text/javascript">
-        $(document).ready(function(){
-            $('#startDate').datepicker(); 
-            $('#endDate').datepicker();
-        });
-    </script>
+    <script src = '/javascript/establishPhotos.js'></script>
+    <script src = '/javascript/valorate.js'></script>
 
 </head>
 <body style="background-color: #BDD4F2;">
@@ -94,6 +89,7 @@
         <%- include('partials/modals/requestServices') %>
         <%- include('partials/modals/establishDisponibility') %>
         <%- include('partials/modals/establishPhotos') %>
+        <%- include('partials/modals/valorate') %>
     
     </div>
 </body>

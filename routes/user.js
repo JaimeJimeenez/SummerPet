@@ -5,6 +5,7 @@ const config = require('../config');
 const { validateSignUp, validationMiddleware } = require('../validators/signUp');
 const DAOUser = require('../DAOs/DAOUser');
 const DAOApplication = require('../DAOs/DAOApplication');
+const DAOValoration = require('../DAOs/DAOValoration');
 
 // Package's modules
 const express = require('express');
@@ -19,6 +20,7 @@ const pool = mysql.createPool(config.mysqlConfig);
 // DAO's instances
 const daoUser = new DAOUser(pool);
 const daoApplication = new DAOApplication(pool);
+const daoValoration = new DAOValoration(pool);
 
 // ----------- Middlewares -----------
 const alreadyLogIn = (request, response, next) => {
@@ -245,6 +247,18 @@ router.post('/insertPhotoLocation', multerFactory.single('photo'), (request, res
     })
 });
 
+router.get('/valorate/:id', (request, response) => {
+    let id = Number(request.params.id);
+
+    if (isNaN(id)) {
+        response.status(400);
+        response.end('Incorrect petition');
+    } else daoApplication.getApplicationsByOwner(request.session.user.Id, id, (err, applications) => {
+        if (err) next(err);
+        else response.json({ applications : applications });
+    });
+});
+
 router.get('/getValorations', (request, response) => {
     let id = Number(request.query.id);
 
@@ -263,12 +277,42 @@ router.get('/getValorations', (request, response) => {
                     valorations.forEach(valoration => note += valoration.Valoration );
                     if (note !== 0) note /= valorations.length;
                     valorations.half = Math.round(note);
-                    console.log(valorations);
                     response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted });
                 } else response.render('valorations', { usuario : user, valorations : valorations, accepted : accepted});
             });
         });
     }); 
+});
+
+router.post('/valorateUser', (request, response) => {
+    response.status(200);
+
+    let ids = request.body.ids.split('-');
+    let idApplication = Number(ids[0]);
+    let idDogWatcher = Number(ids[1]);
+
+    console.log(idApplication);
+    console.log(idDogWatcher);
+    console.log(request.body);
+
+    if (!isNaN(idApplication) && !isNaN(idDogWatcher)) 
+        daoValoration.insertValoration(request.session.user.Id, idDogWatcher, request.body.valoration, request.body.description, (err) => {
+            if (err) {
+                response.status(400);
+                response.end();
+            }
+            else daoApplication.deleteApplication(idApplication, (err) => {
+                if (err) {
+                    response.status(400);
+                    response.end();
+                } else response.json({});
+            })
+        });
+    else {
+        response.status(400);
+        response.end('Incorrect petition');
+    }
+
 });
 
 module.exports = { router, pool };
