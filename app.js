@@ -42,10 +42,11 @@ app.use('/', index.router);
 app.use('/user', user.router);
 app.use('/application', application.router);
 
+/*
 app.listen(config.port, () => {
     console.log('Server listening at port: ' + config.port);
-});
-
-/*app.listen(process.env.PORT, () => {
-    console.log('Server listening at port: ' + config.port);
 });*/
+
+app.listen(process.env.PORT, () => {
+    console.log('Server listening at port: ' + config.port);
+});
