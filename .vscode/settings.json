@@ -1,4 +1,8 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/5dbf8d16-c58e-4adc-b365-5bea42ce489a/resourceGroups/SummerPet/providers/Microsoft.Web/sites/summerpet",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
 }
